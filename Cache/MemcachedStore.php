@@ -25,13 +25,14 @@ class MemcachedStore extends ArrayStore {
      * @param mixed $cacheNamespace
      * @param string $server (default: "127.0.0.1", the default memcached ip)
      * @param string $port (default: "11211", the default memcached port)
+     * @param mixed $app
      * @return void
      */
-    public function __construct($cacheNamespace, $server = "127.0.0.1", $port = "11211")
+    public function __construct($cacheNamespace, $server = "127.0.0.1", $port = "11211", $app = null)
     {
 
         // Run the parent function to build base $app and $config
-        parent::__construct($cacheNamespace);
+        parent::__construct($cacheNamespace, $app);
 
         // Memcached store requires a MemcachedConnector
         $this->app->singleton('memcached.connector', function() {
@@ -42,7 +43,7 @@ class MemcachedStore extends ArrayStore {
         $this->config['cache'] = [
             'prefix' => $this->cacheNamespace,
             'stores' => [
-                $this->cacheNamespace => [
+                $this->storeName => [
                     'driver' => 'memcached',
                     'servers' => [
                         [

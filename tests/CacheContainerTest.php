@@ -20,6 +20,17 @@ class CacheContainerTest extends TestCase
         $this->assertEquals("array", $cache->get('foo'));
     }
 
+    public function testArrayStorePersistence()
+    {
+        // Create the $cache object
+        $cacheStore = new ArrayStore("global");
+        $cache = $cacheStore->instance();
+
+        // Doesn't store anything, just tried to read the last one
+        // Won't work, because array doesn't save anything
+        $this->assertNotEquals("array", $cache->get('foo'));
+    }
+
     /**
      * Test file store
      */
@@ -31,6 +42,16 @@ class CacheContainerTest extends TestCase
 
         // Store "foo" and try to read it
         $cache->forever("foo", "bar");
+        $this->assertEquals("bar", $cache->get('foo'));
+    }
+
+    public function testFileStorePersistence()
+    {
+        // Create the $cache object
+        $cacheStore = new FileStore("global", "./tests/cache");
+        $cache = $cacheStore->instance();
+
+        // Doesn't store anything, just tried to read the last one
         $this->assertEquals("bar", $cache->get('foo'));
     }
 
@@ -75,6 +96,16 @@ class CacheContainerTest extends TestCase
         $this->assertEquals("memcached bar", $cache->get('foo'));
     }
 
+    public function testMemcachedStorePersistence()
+    {
+        // Create the $cache object using the default memcache server config
+        $cacheStore = new MemcachedStore("global");
+        $cache = $cacheStore->instance();
+
+        // Doesn't store anything, just tried to read the last one
+        $this->assertEquals("memcached bar", $cache->get('foo'));
+    }
+
     public function testMultipleMemcachedStore()
     {
         // Create two $cache object
@@ -102,11 +133,42 @@ class CacheContainerTest extends TestCase
         $this->assertEquals("BARRRRRRRRE", $cacheUser->get('foo'));
     }
 
-    /**
-     * @expectedException     InvalidArgumentException
-     */
-    public function testInvalidNamespace()
+    public function testNoNamespace()
     {
-        $cache = new FileStore(); //Should throw InvalidArgumentException
+        $cacheStore = new ArrayStore();
+        $cache = $cacheStore->instance();
+
+        // Store "foo" and try to read it
+        $cache->forever("foo", "testNoNamespace");
+        $this->assertEquals("testNoNamespace", $cache->get('foo'));
+    }
+
+    public function testReuseApp()
+    {
+        $app = new \Illuminate\Container\Container();
+
+        // Create two $cache object
+        $cacheStore = new FileStore("global", "./tests/cache", $app);
+        $cacheGlobal = $cacheStore->instance();
+
+        $cacheStore2 = new FileStore("user2419", "./tests/cache", $app);
+        $cacheUser = $cacheStore2->instance();
+
+        // Store stuff in first
+        $cacheGlobal->forever("test", "1234");
+        $cacheGlobal->forever("foo", "bar");
+        $cacheGlobal->forever("cities", ['Montréal', 'Paris', 'NYC']);
+
+        // Store stuff in second
+        $cacheUser->forever("test", "1234");
+        $cacheUser->forever("foo", "BARRRRRRRRE");
+        $cacheUser->forever("cities", ['Montréal', 'Paris', 'NYC']);
+
+        // Flush first
+        $cacheGlobal->flush();
+
+        // First show be empty, but not the second one
+        $this->assertEquals(null, $cacheGlobal->get('foo'));
+        $this->assertEquals("BARRRRRRRRE", $cacheUser->get('foo'));
     }
 }

@@ -15,7 +15,7 @@
  */
 namespace UserFrosting\Cache;
 
-use UserFrosting\Config\Config;
+use Illuminate\Config\Repository;
 use Illuminate\Cache\CacheManager;
 use Illuminate\Container\Container;
 
@@ -38,27 +38,38 @@ class ArrayStore {
     protected $cacheNamespace;
 
     /**
+     * @var string
+     */
+    protected $storeName;
+
+    /**
      * Create the empty Illuminate Container, Config and setup namespace
      *
      * @access public
-     * @param mixed $cacheNamespace
+     * @param string $cacheNamespace
+     * @param mixed $app
      * @return void
      */
-    function __construct($cacheNamespace = "") {
+    function __construct($cacheNamespace = "", $app = null)
+    {
 
         //Throw InvalidArgumentException if namespace argument is not valid
         if (!is_string($cacheNamespace) || $cacheNamespace == "") {
-            throw new \InvalidArgumentException;
+            $this->storeName = "default";
+        } else {
+            $this->storeName = $this->cacheNamespace;
         }
 
         // Setup cache namespace and cie
         $this->cacheNamespace = $cacheNamespace;
-        $this->app = new Container();
-        $this->config = new Config();
+        $this->config = new Repository();
+
+        // Resuse the ctor $app is it exist
+        $this->app = ($app instanceof Container) ? $app : new Container();
 
         // Setup an array store
         $this->config['cache.stores'] = [
-            $this->cacheNamespace => [
+            $this->storeName => [
                 'driver' => 'array'
             ]
         ];
@@ -70,13 +81,14 @@ class ArrayStore {
      * @access public
      * @return Laravel Cache instance
      */
-    public function instance() {
+    public function instance()
+    {
         $config = $this->config;
         $this->app->singleton('config', function() use ($config) {
             return $config;
         });
 
         $cacheManager = new CacheManager($this->app);
-        return $cacheManager->store($this->cacheNamespace);
+        return $cacheManager->store($this->storeName);
     }
 }
