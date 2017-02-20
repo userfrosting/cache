@@ -53,16 +53,16 @@ class ArrayStore {
     function __construct($cacheNamespace = "", $app = null)
     {
 
+        // Setup cache namespace and cie
+        $this->cacheNamespace = $cacheNamespace;
+        $this->config = new Repository();
+
         //Throw InvalidArgumentException if namespace argument is not valid
         if (!is_string($cacheNamespace) || $cacheNamespace == "") {
             $this->storeName = "default";
         } else {
             $this->storeName = $this->cacheNamespace;
         }
-
-        // Setup cache namespace and cie
-        $this->cacheNamespace = $cacheNamespace;
-        $this->config = new Repository();
 
         // Resuse the ctor $app is it exist
         $this->app = ($app instanceof Container) ? $app : new Container();
