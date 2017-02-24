@@ -28,7 +28,7 @@ class MemcachedStore extends ArrayStore {
      * @param mixed $app
      * @return void
      */
-    public function __construct($cacheNamespace, $server = "127.0.0.1", $port = "11211", $app = null)
+    public function __construct($cacheNamespace, $memcacheConfig = [], $app = null)
     {
 
         // Run the parent function to build base $app and $config
@@ -40,17 +40,18 @@ class MemcachedStore extends ArrayStore {
         });
 
         // Setup the config for this file store
+        // Nb.: Yes. The `servers` part is in a double array.
         $this->config['cache'] = [
             'prefix' => $this->cacheNamespace,
             'stores' => [
                 $this->storeName => [
                     'driver' => 'memcached',
                     'servers' => [
-                        [
-                            'host' => $server,
-                            'port' => $port,
+                        array_merge([
+                            'host' => '127.0.0.1',
+                            'port' => 11211,
                             'weight' => 100
-                        ]
+                        ], $memcacheConfig)
                     ]
                 ]
             ]
