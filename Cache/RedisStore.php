@@ -14,6 +14,7 @@ namespace UserFrosting\Cache;
 
 use UserFrosting\Cache\CacheStore;
 use Illuminate\Redis\RedisManager;
+use Illuminate\Redis\Database;
 
 class RedisStore extends ArrayStore {
 
@@ -56,7 +57,11 @@ class RedisStore extends ArrayStore {
 
         // Register redis manager
         $this->app->singleton('redis', function ($app) use ($redisConfig) {
-            return new RedisManager('predis', $redisConfig);
+            if (class_exists("Illuminate\Redis\RedisManager")) {
+                return new RedisManager('predis', $redisConfig);
+            } else {
+                return new Database($redisConfig);
+            }
         });
     }
 
