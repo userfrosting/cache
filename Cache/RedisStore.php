@@ -23,27 +23,16 @@ class RedisStore extends ArrayStore {
      * port configuraton
      *
      * @access public
-     * @param mixed $cacheNamespace
      * @param mixed $redisServer (default: [])
+     * @param string $storeName (default: "default")
      * @param mixed $app (default: null)
      * @return void
      */
-    public function __construct($cacheNamespace, $redisServer = [], $app = null)
+    public function __construct($redisServer = [], $storeName = "default", $app = null)
     {
 
         // Run the parent function to build base $app and $config
-        parent::__construct($cacheNamespace, $app);
-
-        // Setup the config for this file store
-        $this->config['cache'] = [
-            'prefix' => $this->cacheNamespace,
-            'stores' => [
-                $this->storeName => [
-                    'driver' => 'redis',
-                    'connection' => 'default'
-                ]
-            ]
-        ];
+        parent::__construct($storeName, $app);
 
         // Setup Redis server config
         $redisConfig = [
@@ -51,8 +40,20 @@ class RedisStore extends ArrayStore {
                 'host' => '127.0.0.1',
                 'password' => null,
                 'port' => 6379,
-                'database' => 0
+                'database' => 0,
+                'prefix' => ''
             ], $redisServer)
+        ];
+
+        // Setup the config for this file store
+        $this->config['cache'] = [
+            'prefix' => $redisConfig['default']['prefix'],
+            'stores' => [
+                $this->storeName => [
+                    'driver' => 'redis',
+                    'connection' => 'default'
+                ]
+            ]
         ];
 
         // Register redis manager
@@ -63,18 +64,5 @@ class RedisStore extends ArrayStore {
                 return new Database($redisConfig);
             }
         });
-    }
-
-    /**
-     * To make use of the namespace, the redis driver uses the tags feature
-     * to tag every key with the namespace
-     *
-     * @access public
-     * @return Laravel Cache instance
-     */
-    public function instance()
-    {
-        $instance = parent::instance();
-        return $instance->tags($this->cacheNamespace);
     }
 }

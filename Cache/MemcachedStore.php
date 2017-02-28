@@ -22,17 +22,24 @@ class MemcachedStore extends ArrayStore {
      * port configuraton
      *
      * @access public
-     * @param mixed $cacheNamespace
-     * @param string $server (default: "127.0.0.1", the default memcached ip)
-     * @param string $port (default: "11211", the default memcached port)
+     * @param array $memcachedConfig (default: [])
+     * @param string $storeName (default: "default")
      * @param mixed $app
      * @return void
      */
-    public function __construct($cacheNamespace, $memcacheConfig = [], $app = null)
+    public function __construct($memcachedConfig = [], $storeName = "default", $app = null)
     {
 
         // Run the parent function to build base $app and $config
-        parent::__construct($cacheNamespace, $app);
+        parent::__construct($storeName, $app);
+
+        // Merge argument config with default one
+        $memcachedConfig = array_merge([
+            'host' => '127.0.0.1',
+            'port' => 11211,
+            'weight' => 100,
+            'prefix' => ''
+        ], $memcachedConfig);
 
         // Memcached store requires a MemcachedConnector
         $this->app->singleton('memcached.connector', function() {
@@ -42,32 +49,15 @@ class MemcachedStore extends ArrayStore {
         // Setup the config for this file store
         // Nb.: Yes. The `servers` part is in a double array.
         $this->config['cache'] = [
-            'prefix' => $this->cacheNamespace,
+            'prefix' => $memcachedConfig['prefix'],
             'stores' => [
                 $this->storeName => [
                     'driver' => 'memcached',
                     'servers' => [
-                        array_merge([
-                            'host' => '127.0.0.1',
-                            'port' => 11211,
-                            'weight' => 100
-                        ], $memcacheConfig)
+                        $memcachedConfig
                     ]
                 ]
             ]
         ];
-    }
-
-    /**
-     * To make use of the namespace, the memcached driver uses the tags feature
-     * to tag every key with the namespace
-     *
-     * @access public
-     * @return Laravel Cache instance
-     */
-    public function instance()
-    {
-        $instance = parent::instance();
-        return $instance->tags($this->cacheNamespace);
     }
 }

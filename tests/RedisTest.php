@@ -13,7 +13,7 @@ class RedisTest extends TestCase
     public function testRedisStore()
     {
         // Create the $cache object using the default memcache server config
-        $cacheStore = new RedisStore("global");
+        $cacheStore = new RedisStore();
         $cache = $cacheStore->instance();
 
         // Store "foo" and try to read it
@@ -24,14 +24,14 @@ class RedisTest extends TestCase
     public function testRedisStorePersistence()
     {
         // Create the $cache object using the default memcache server config
-        $cacheStore = new RedisStore("global");
+        $cacheStore = new RedisStore();
         $cache = $cacheStore->instance();
 
         // Doesn't store anything, just tried to read the last one
         $this->assertEquals("Redis bar", $cache->get('foo'));
     }
 
-    public function testMultipleRedisStore()
+    /*public function testMultipleRedisStore()
     {
         // Create two $cache object
         $cacheStore = new RedisStore("global");
@@ -56,5 +56,5 @@ class RedisTest extends TestCase
         // First show be empty, but not the second one
         $this->assertEquals(null, $cacheGlobal->get('foo'));
         $this->assertEquals("BARRRRRRRRE", $cacheUser->get('foo'));
-    }
+    }*/
 }

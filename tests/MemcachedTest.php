@@ -13,7 +13,7 @@ class MemcachedTest extends TestCase
     public function testMemcachedStore()
     {
         // Create the $cache object using the default memcache server config
-        $cacheStore = new MemcachedStore("global");
+        $cacheStore = new MemcachedStore();
         $cache = $cacheStore->instance();
 
         // Store "foo" and try to read it
@@ -24,14 +24,14 @@ class MemcachedTest extends TestCase
     public function testMemcachedStorePersistence()
     {
         // Create the $cache object using the default memcache server config
-        $cacheStore = new MemcachedStore("global");
+        $cacheStore = new MemcachedStore();
         $cache = $cacheStore->instance();
 
         // Doesn't store anything, just tried to read the last one
         $this->assertEquals("memcached bar", $cache->get('foo'));
     }
 
-    public function testMultipleMemcachedStore()
+    /*public function testMultipleMemcachedStore()
     {
         // Create two $cache object
         $cacheStore = new MemcachedStore("global");
@@ -56,5 +56,5 @@ class MemcachedTest extends TestCase
         // First show be empty, but not the second one
         $this->assertEquals(null, $cacheGlobal->get('foo'));
         $this->assertEquals("BARRRRRRRRE", $cacheUser->get('foo'));
-    }
+    }*/
 }

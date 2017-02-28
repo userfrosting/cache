@@ -35,33 +35,25 @@ class ArrayStore {
     /**
      * @var string
      */
-    protected $cacheNamespace;
-
-    /**
-     * @var string
-     */
     protected $storeName;
 
     /**
-     * Create the empty Illuminate Container, Config and setup namespace
+     * Create the empty Illuminate Container and required config
      *
      * @access public
-     * @param string $cacheNamespace
+     * @param string $storeName (default: "default")
      * @param mixed $app
      * @return void
      */
-    function __construct($cacheNamespace = "", $app = null)
+    function __construct($storeName = "default", $app = null)
     {
-
-        // Setup cache namespace and cie
-        $this->cacheNamespace = $cacheNamespace;
+        $this->storeName = $storeName;
         $this->config = new Repository();
 
         //Throw InvalidArgumentException if namespace argument is not valid
-        if (!is_string($cacheNamespace) || $cacheNamespace == "") {
-            $this->storeName = "default";
-        } else {
-            $this->storeName = $this->cacheNamespace;
+        if (!is_string($this->storeName) || $this->storeName == "")
+        {
+            throw new \InvalidArgumentException("Store name is not a valid string");
         }
 
         // Resuse the ctor $app is it exist

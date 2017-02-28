@@ -22,16 +22,16 @@ class FileStore extends ArrayStore {
      * config and setup the necessary config
      *
      * @access public
-     * @param mixed $cacheNamespace
      * @param string $path (default: "./")
+     * @param string $storeName (default: "default")
      * @param mixed $app
      * @return void
      */
-    public function __construct($cacheNamespace = "", $path = "./", $app = null)
+    public function __construct($path = "./", $storeName = "default", $app = null)
     {
 
         // Run the parent function to build base $app and $config
-        parent::__construct($cacheNamespace, $app);
+        parent::__construct($storeName, $app);
 
         // Files store requires a Filesystem access
         $this->app->singleton('files', function() {
@@ -42,7 +42,7 @@ class FileStore extends ArrayStore {
         $this->config['cache.stores'] = [
             $this->storeName => [
                 'driver' => 'file',
-                'path' => $path . "/" . $cacheNamespace
+                'path' => $path
             ]
         ];
     }

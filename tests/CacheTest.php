@@ -12,7 +12,7 @@ class CacheTest extends TestCase
     public function testArrayStore()
     {
         // Create the $cache object
-        $cacheStore = new ArrayStore("global");
+        $cacheStore = new ArrayStore();
         $cache = $cacheStore->instance();
 
         // Store "foo" and try to read it
@@ -23,7 +23,7 @@ class CacheTest extends TestCase
     public function testArrayStorePersistence()
     {
         // Create the $cache object
-        $cacheStore = new ArrayStore("global");
+        $cacheStore = new ArrayStore();
         $cache = $cacheStore->instance();
 
         // Doesn't store anything, just tried to read the last one
@@ -37,7 +37,7 @@ class CacheTest extends TestCase
     public function testFileStore()
     {
         // Create the $cache object
-        $cacheStore = new FileStore("global", "./tests/cache");
+        $cacheStore = new FileStore("./tests/cache");
         $cache = $cacheStore->instance();
 
         // Store "foo" and try to read it
@@ -48,14 +48,14 @@ class CacheTest extends TestCase
     public function testFileStorePersistence()
     {
         // Create the $cache object
-        $cacheStore = new FileStore("global", "./tests/cache");
+        $cacheStore = new FileStore("./tests/cache");
         $cache = $cacheStore->instance();
 
         // Doesn't store anything, just tried to read the last one
         $this->assertEquals("bar", $cache->get('foo'));
     }
 
-    public function testMultipleFileStore()
+    /*public function testMultipleFileStore()
     {
         // Create two $cache object
         $cacheStore = new FileStore("global", "./tests/cache");
@@ -80,22 +80,9 @@ class CacheTest extends TestCase
         // First show be empty, but not the second one
         $this->assertEquals(null, $cacheGlobal->get('foo'));
         $this->assertEquals("BARRRRRRRRE", $cacheUser->get('foo'));
-    }
+    }*/
 
-    /**
-     * Misc Tests
-     */
-    public function testNoNamespace()
-    {
-        $cacheStore = new ArrayStore();
-        $cache = $cacheStore->instance();
-
-        // Store "foo" and try to read it
-        $cache->forever("foo", "testNoNamespace");
-        $this->assertEquals("testNoNamespace", $cache->get('foo'));
-    }
-
-    public function testReuseApp()
+    /*public function testReuseApp()
     {
         $app = new \Illuminate\Container\Container();
 
@@ -122,5 +109,5 @@ class CacheTest extends TestCase
         // First show be empty, but not the second one
         $this->assertEquals(null, $cacheGlobal->get('foo'));
         $this->assertEquals("BARRRRRRRRE", $cacheUser->get('foo'));
-    }
+    }*/
 }
