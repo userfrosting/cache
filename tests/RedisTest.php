@@ -31,30 +31,27 @@ class RedisTest extends TestCase
         $this->assertEquals("Redis bar", $cache->get('foo'));
     }
 
-    /*public function testMultipleRedisStore()
+    public function testMultipleRedisStore()
     {
         // Create two $cache object
-        $cacheStore = new RedisStore("global");
-        $cacheGlobal = $cacheStore->instance();
-
-        $cacheStore2 = new RedisStore("user2419");
-        $cacheUser = $cacheStore2->instance();
+        $cacheStore = new RedisStore();
+        $cache = $cacheStore->instance();
 
         // Store stuff in first
-        $cacheGlobal->forever("test", "1234");
-        $cacheGlobal->forever("foo", "bar");
-        $cacheGlobal->forever("cities", ['Montréal', 'Paris', 'NYC']);
+        $cache->tags('global')->forever("test", "1234");
+        $cache->tags('global')->forever("foo", "bar");
+        $cache->tags('global')->forever("cities", ['Montréal', 'Paris', 'NYC']);
 
         // Store stuff in second
-        $cacheUser->forever("test", "1234");
-        $cacheUser->forever("foo", "BARRRRRRRRE");
-        $cacheUser->forever("cities", ['Montréal', 'Paris', 'NYC']);
+        $cache->tags('user')->forever("test", "1234");
+        $cache->tags('user')->forever("foo", "BARRRRRRRRE");
+        $cache->tags('user')->forever("cities", ['Montréal', 'Paris', 'NYC']);
 
         // Flush first
-        $cacheGlobal->flush();
+        $cache->tags('global')->flush();
 
         // First show be empty, but not the second one
-        $this->assertEquals(null, $cacheGlobal->get('foo'));
-        $this->assertEquals("BARRRRRRRRE", $cacheUser->get('foo'));
-    }*/
+        $this->assertEquals(null, $cache->tags('global')->get('foo'));
+        $this->assertEquals("BARRRRRRRRE", $cache->tags('user')->get('foo'));
+    }
 }
