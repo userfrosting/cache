@@ -12,7 +12,6 @@
  */
 namespace UserFrosting\Cache;
 
-use UserFrosting\Cache\CacheStore;
 use Illuminate\Redis\RedisManager;
 use Illuminate\Redis\Database;
 

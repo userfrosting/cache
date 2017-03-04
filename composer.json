@@ -27,6 +27,5 @@
         "psr-4": {
             "UserFrosting\\Cache\\": "Cache"
         }
-    },
-    "minimum-stability": "dev"
+    }
 }
