@@ -1,5 +1,16 @@
 <?php
 
+/**
+ * RedisTests
+ *
+ * Tests for `RedisStore`
+ *
+ * @package   userfrosting/Cache
+ * @link      https://github.com/userfrosting/Cache
+ * @author    Louis Charette
+ * @license   https://github.com/userfrosting/UserFrosting/blob/master/licenses/UserFrosting.md (MIT License)
+ */
+
 namespace UserFrosting\Cache;
 
 use PHPUnit\Framework\TestCase;

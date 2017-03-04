@@ -1,11 +1,28 @@
 <?php
 
+/**
+ * CacheTest
+ *
+ * Tests for `ArrayStore` and `FileStore`
+ *
+ * @package   userfrosting/Cache
+ * @link      https://github.com/userfrosting/Cache
+ * @author    Louis Charette
+ * @license   https://github.com/userfrosting/UserFrosting/blob/master/licenses/UserFrosting.md (MIT License)
+ */
+
 namespace UserFrosting\Cache;
 
 use PHPUnit\Framework\TestCase;
 
 class CacheTest extends TestCase
 {
+    public $storage;
+
+    public function setup() {
+        $this->storage = "./tests/cache";
+    }
+
     /**
      * Test basic array store
      */
@@ -37,7 +54,7 @@ class CacheTest extends TestCase
     public function testFileStore()
     {
         // Create the $cache object
-        $cacheStore = new FileStore("./tests/cache");
+        $cacheStore = new FileStore($this->storage);
         $cache = $cacheStore->instance();
 
         // Store "foo" and try to read it
@@ -48,49 +65,22 @@ class CacheTest extends TestCase
     public function testFileStorePersistence()
     {
         // Create the $cache object
-        $cacheStore = new FileStore("./tests/cache");
+        $cacheStore = new FileStore($this->storage);
         $cache = $cacheStore->instance();
 
         // Doesn't store anything, just tried to read the last one
         $this->assertEquals("bar", $cache->get('foo'));
     }
 
-    /*public function testMultipleFileStore()
-    {
-        // Create two $cache object
-        $cacheStore = new FileStore("global", "./tests/cache");
-        $cacheGlobal = $cacheStore->instance();
-
-        $cacheStore2 = new FileStore("user2419", "./tests/cache");
-        $cacheUser = $cacheStore2->instance();
-
-        // Store stuff in first
-        $cacheGlobal->forever("test", "1234");
-        $cacheGlobal->forever("foo", "bar");
-        $cacheGlobal->forever("cities", ['Montréal', 'Paris', 'NYC']);
-
-        // Store stuff in second
-        $cacheUser->forever("test", "1234");
-        $cacheUser->forever("foo", "BARRRRRRRRE");
-        $cacheUser->forever("cities", ['Montréal', 'Paris', 'NYC']);
-
-        // Flush first
-        $cacheGlobal->flush();
-
-        // First show be empty, but not the second one
-        $this->assertEquals(null, $cacheGlobal->get('foo'));
-        $this->assertEquals("BARRRRRRRRE", $cacheUser->get('foo'));
-    }*/
-
     /*public function testReuseApp()
     {
         $app = new \Illuminate\Container\Container();
 
         // Create two $cache object
-        $cacheStore = new FileStore("global", "./tests/cache", $app);
+        $cacheStore = new FileStore("global", $this->storage, $app);
         $cacheGlobal = $cacheStore->instance();
 
-        $cacheStore2 = new FileStore("user2419", "./tests/cache", $app);
+        $cacheStore2 = new FileStore("user2419", $this->storage, $app);
         $cacheUser = $cacheStore2->instance();
 
         // Store stuff in first
