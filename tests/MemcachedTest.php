@@ -54,4 +54,24 @@ class MemcachedTest extends TestCase
         $this->assertEquals(null, $cache->tags('global')->get('foo'));
         $this->assertEquals("BARRRRRRRRE", $cache->tags('user')->get('foo'));
     }
+
+    public function testMultipleMemcachedStoreWithTags()
+    {
+        // Create two $cache object
+        $cacheStore = new MemcachedStore();
+        $cache = $cacheStore->instance();
+
+        // Store stuff in first
+        $cache->tags(['foo', 'red'])->forever("bar", "red");
+
+        // Store stuff in second
+        $cache->tags(['foo', 'blue'])->forever("bar", "blue");
+
+        // Flush first
+        $cache->tags('red')->flush();
+
+        // First show be empty, but not the second one
+        $this->assertEquals(null, $cache->tags(['foo', 'red'])->get('bar'));
+        $this->assertEquals('blue', $cache->tags(['foo', 'blue'])->get('bar'));
+    }
 }
