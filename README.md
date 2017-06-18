@@ -1,4 +1,4 @@
-# Cache module for UserFrosting
+# Cache module for UserFrosting 4.1
 
 Louis Charette, 2017
 

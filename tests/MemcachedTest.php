@@ -15,6 +15,9 @@ namespace UserFrosting\Cache;
 
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @requires extension Memcached
+ */
 class MemcachedTest extends TestCase
 {
 
