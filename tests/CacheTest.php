@@ -20,7 +20,7 @@ class CacheTest extends TestCase
     public $storage;
 
     public function setup() {
-        $this->storage = "./tests/cache";
+        $this->storage = "./tests/cache/FileStore";
     }
 
     /**

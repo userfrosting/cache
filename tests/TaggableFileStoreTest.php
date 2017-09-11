@@ -20,7 +20,7 @@ class TaggableFileStoreTest extends TestCase
     public $storage;
 
     public function setup() {
-        $this->storage = "./tests/cache";
+        $this->storage = "./tests/cache/TaggableFileStore";
     }
 
     /**
@@ -67,7 +67,7 @@ class TaggableFileStoreTest extends TestCase
         $cache->tags('global')->flush();
 
         // First show be empty, but not the second one
-        $this->assertEquals(null, $cache->tags('global')->get('foo'));
+        $this->assertNull($cache->tags('global')->get('foo'));
         $this->assertEquals("BARRRRRRRRE", $cache->tags('user')->get('foo'));
     }
 
@@ -87,7 +87,7 @@ class TaggableFileStoreTest extends TestCase
         $cache->tags('red')->flush();
 
         // First show be empty, but not the second one
-        //$this->assertEquals(null, $cache->tags(['foo', 'red'])->get('bar'));
+        $this->assertNull($cache->tags(['foo', 'red'])->get('bar'));
         $this->assertEquals('blue', $cache->tags(['foo', 'blue'])->get('bar'));
     }
 
