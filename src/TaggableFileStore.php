@@ -17,8 +17,8 @@ use UserFrosting\Cache\Driver\TaggableFileStore as TaggableFileDriver;
 use Illuminate\Cache\CacheManager;
 use Illuminate\Filesystem\Filesystem;
 
-class TaggableFileStore extends ArrayStore {
-
+class TaggableFileStore extends ArrayStore
+{
     /**
      * Extend the `ArrayStore` contructor to accept the tfile driver $path
      * config and setup the necessary config
@@ -31,7 +31,6 @@ class TaggableFileStore extends ArrayStore {
      */
     public function __construct($path = "./", $storeName = "default", $app = null)
     {
-
         // Run the parent function to build base $app and $config
         parent::__construct($storeName, $app);
 
@@ -64,9 +63,9 @@ class TaggableFileStore extends ArrayStore {
         // Register the `tfile` custom driver
         $cacheManager->extend('tfile', function($app, $config)
         {
-			$store = new TaggableFileDriver($app['files'], $config['path'], $config);
+            $store = new TaggableFileDriver($app['files'], $config['path'], $config);
             return $this->repository($store);
-		});
+        });
 
         return $cacheManager->store($this->storeName);
     }

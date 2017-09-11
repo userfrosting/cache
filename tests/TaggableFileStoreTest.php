@@ -93,7 +93,6 @@ class TaggableFileStoreTest extends TestCase
 
     public function testFlushingTaggableFileStore()
     {
-        // Create two $cache object
         $cacheStore = new TaggableFileStore($this->storage);
         $cache = $cacheStore->instance();
         $cache->flush();
