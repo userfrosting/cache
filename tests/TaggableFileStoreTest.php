@@ -97,4 +97,23 @@ class TaggableFileStoreTest extends TestCase
         $cache = $cacheStore->instance();
         $cache->flush();
     }
+
+    public function testTagsFlush()
+    {
+        // Get store
+        $cacheStore = new TaggableFileStore($this->storage);
+        $cache = $cacheStore->instance();
+
+        // Start by not using tags
+        $cache->put('test', "123", 60);
+        $this->assertEquals("123", $cache->get('test'));
+        $this->assertTrue($cache->flush());
+        $this->assertNull($cache->get('test'));
+
+        // Try again with tags
+        $cache->tags('blah')->put('blah', "321", 60);
+        $this->assertEquals("321", $cache->tags('blah')->get('blah'));
+        $this->assertNull($cache->tags('blah')->flush());
+        $this->assertNull($cache->tags('blah')->get('blah'));
+    }
 }
