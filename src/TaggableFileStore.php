@@ -1,35 +1,36 @@
 <?php
+/**
+ * UserFrosting (http://www.userfrosting.com)
+ *
+ * @link      https://github.com/userfrosting/Cache
+ * @license   https://github.com/userfrosting/Cache/blob/master/licenses/UserFrosting.md (MIT License)
+*/
+namespace UserFrosting\Cache;
+
+use Illuminate\Cache\CacheManager;
+use Illuminate\Container\Container;
+use Illuminate\Filesystem\Filesystem;
+use UserFrosting\Cache\Driver\TaggableFileStore as TaggableFileDriver;
 
 /**
  * TaggableFileStore Class
  *
  * Setup a cache instance using the custom `tfile` driver
  *
- * @package   userfrosting/Cache
- * @link      https://github.com/userfrosting/Cache
  * @author    Louis Charette
- * @license   https://github.com/userfrosting/UserFrosting/blob/master/licenses/UserFrosting.md (MIT License)
  */
-
-namespace UserFrosting\Cache;
-
-use UserFrosting\Cache\Driver\TaggableFileStore as TaggableFileDriver;
-use Illuminate\Cache\CacheManager;
-use Illuminate\Filesystem\Filesystem;
-
 class TaggableFileStore extends ArrayStore
 {
     /**
      * Extend the `ArrayStore` contructor to accept the tfile driver $path
      * config and setup the necessary config
      *
-     * @access public
      * @param string $path (default: "./")
      * @param string $storeName (default: "default")
-     * @param mixed $app
+     * @param Container|null $app
      * @return void
      */
-    public function __construct($path = "./", $storeName = "default", $app = null)
+    public function __construct($path = "./", $storeName = "default", Container $app = null)
     {
         // Run the parent function to build base $app and $config
         parent::__construct($storeName, $app);

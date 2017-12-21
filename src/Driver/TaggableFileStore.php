@@ -1,4 +1,14 @@
 <?php
+/**
+ * UserFrosting (http://www.userfrosting.com)
+ *
+ * @link      https://github.com/userfrosting/Cache
+ * @license   https://github.com/userfrosting/Cache/blob/master/licenses/UserFrosting.md (MIT License)
+ */
+namespace UserFrosting\Cache\Driver;
+
+use Illuminate\Cache\FileStore;
+use Illuminate\Filesystem\Filesystem;
 
 /**
  * TaggableFileStore Class
@@ -6,20 +16,10 @@
  * Custom file based cache driver with supports for Tags
  * Inspired by unikent/taggedFileCache
  *
- * @package   userfrosting/Cache
- * @link      https://github.com/userfrosting/Cache
  * @author    Louis Charette
- * @license   https://github.com/userfrosting/UserFrosting/blob/master/licenses/UserFrosting.md (MIT License)
  */
-
-namespace UserFrosting\Cache\Driver;
-
-use Illuminate\Cache\FileStore;
-use Illuminate\Filesystem\Filesystem;
-
 class TaggableFileStore extends FileStore
 {
-
     /**
      * @var string The separator when creating a tagged directory.
      */
@@ -38,7 +38,7 @@ class TaggableFileStore extends FileStore
 	/**
 	 * Create a new file cache store instance.
 	 *
-	 * @param  \Illuminate\Filesystem\Filesystem $files
+	 * @param  Filesystem $files
 	 * @param  string $directory
 	 * @param  array $options
 	 */
@@ -95,7 +95,7 @@ class TaggableFileStore extends FileStore
 	 * Begin executing a new tags operation.
 	 *
 	 * @param  array|mixed  $names
-	 * @return \Illuminate\Cache\TaggedCache
+	 * @return TaggedFileCache
 	 */
 	public function tags($names)
 	{

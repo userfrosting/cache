@@ -1,32 +1,34 @@
 <?php
+/**
+ * UserFrosting (http://www.userfrosting.com)
+ *
+ * @link      https://github.com/userfrosting/Cache
+ * @license   https://github.com/userfrosting/Cache/blob/master/licenses/UserFrosting.md (MIT License)
+ */
+namespace UserFrosting\Cache;
+
+use Illuminate\Cache\MemcachedConnector;
+use Illuminate\Container\Container;
 
 /**
  * MemcachedStore Class
  *
  * Setup a cache instance in a defined namespace using the `memcached` driver
  *
- * @package   userfrosting/Cache
- * @link      https://github.com/userfrosting/Cache
  * @author    Louis Charette
- * @license   https://github.com/userfrosting/UserFrosting/blob/master/licenses/UserFrosting.md (MIT License)
  */
-namespace UserFrosting\Cache;
-
-use Illuminate\Cache\MemcachedConnector;
-
-class MemcachedStore extends ArrayStore {
-
+class MemcachedStore extends ArrayStore
+{
     /**
      * Extend the `ArrayStore` contructor to accept the memcached server and
      * port configuraton
      *
-     * @access public
      * @param array $memcachedConfig (default: [])
      * @param string $storeName (default: "default")
-     * @param mixed $app
+     * @param Container|null $app
      * @return void
      */
-    public function __construct($memcachedConfig = [], $storeName = "default", $app = null)
+    public function __construct($memcachedConfig = [], $storeName = "default", Container $app = null)
     {
 
         // Run the parent function to build base $app and $config

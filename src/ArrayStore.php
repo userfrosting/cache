@@ -1,4 +1,16 @@
 <?php
+/**
+ * UserFrosting (http://www.userfrosting.com)
+ *
+ * @link      https://github.com/userfrosting/Cache
+ * @license   https://github.com/userfrosting/Cache/blob/master/licenses/UserFrosting.md (MIT License)
+ */
+namespace UserFrosting\Cache;
+
+use Illuminate\Cache\CacheManager;
+use Illuminate\Config\Repository;
+use Illuminate\Container\Container;
+use Illuminate\Contracts\Cache\Store;
 
 /**
  * ArrayStore Class
@@ -8,27 +20,17 @@
  * save anything. This class main purpose is to be a base class to be extended
  * by other store
  *
- * @package   userfrosting/Cache
- * @link      https://github.com/userfrosting/Cache
  * @author    Louis Charette
- * @license   https://github.com/userfrosting/UserFrosting/blob/master/licenses/UserFrosting.md (MIT License)
  */
-namespace UserFrosting\Cache;
-
-use Illuminate\Config\Repository;
-use Illuminate\Cache\CacheManager;
-use Illuminate\Container\Container;
-
-class ArrayStore {
-
+class ArrayStore
+{
     /**
-     * @var mixed
+     * @var Repository
      */
     protected $config;
 
     /**
-     * @var app
-     * Used to create dummy Illuminate Container
+     * @var Container Used to create dummy Illuminate Container
      */
     protected $app;
 
@@ -40,12 +42,11 @@ class ArrayStore {
     /**
      * Create the empty Illuminate Container and required config
      *
-     * @access public
      * @param string $storeName (default: "default")
-     * @param mixed $app
+     * @param Container|null $app (default: null)
      * @return void
      */
-    function __construct($storeName = "default", $app = null)
+    function __construct($storeName = "default", Container $app = null)
     {
         $this->storeName = $storeName;
         $this->config = new Repository();
@@ -70,8 +71,7 @@ class ArrayStore {
     /**
      * Return the store instance from the Laravel CacheManager
      *
-     * @access public
-     * @return Laravel Cache instance
+     * @return Store Laravel Cache instance
      */
     public function instance()
     {

@@ -1,4 +1,13 @@
 <?php
+/**
+ * UserFrosting (http://www.userfrosting.com)
+ *
+ * @link      https://github.com/userfrosting/Cache
+ * @license   https://github.com/userfrosting/Cache/blob/master/licenses/UserFrosting.md (MIT License)
+ */
+namespace UserFrosting\Cache\Driver;
+
+use Illuminate\Cache\TaggedCache;
 
 /**
  * TaggedFileCache Class
@@ -6,19 +15,10 @@
  * Custom file based cache driver with supports for Tags
  * Inspired by unikent/taggedFileCache
  *
- * @package   userfrosting/Cache
- * @link      https://github.com/userfrosting/Cache
  * @author    Louis Charette
- * @license   https://github.com/userfrosting/UserFrosting/blob/master/licenses/UserFrosting.md (MIT License)
  */
-
-namespace UserFrosting\Cache\Driver;
-
-use Illuminate\Cache\TaggedCache;
-
 class TaggedFileCache extends TaggedCache
 {
-
 	/**
 	 * {@inheritdoc}
 	 */

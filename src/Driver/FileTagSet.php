@@ -1,4 +1,13 @@
 <?php
+/**
+ * UserFrosting (http://www.userfrosting.com)
+ *
+ * @link      https://github.com/userfrosting/Cache
+ * @license   https://github.com/userfrosting/Cache/blob/master/licenses/UserFrosting.md (MIT License)
+ */
+ namespace UserFrosting\Cache\Driver;
+
+ use Illuminate\Cache\TagSet;
 
 /**
  * FileTagSet Class
@@ -6,19 +15,13 @@
  * Custom file based cache driver with supports for Tags
  * Inspired by unikent/taggedFileCache
  *
- * @package   userfrosting/Cache
- * @link      https://github.com/userfrosting/Cache
  * @author    Louis Charette
- * @license   https://github.com/userfrosting/UserFrosting/blob/master/licenses/UserFrosting.md (MIT License)
  */
-
-namespace UserFrosting\Cache\Driver;
-
-use Illuminate\Cache\TagSet;
-
 class FileTagSet extends TagSet
 {
-
+    /**
+     *    @var string Driver name
+     */
 	protected static $driver = 'tfile';
 
 	/**
@@ -32,7 +35,6 @@ class FileTagSet extends TagSet
 		return $this->store->tagRepository . $this->store->separator . preg_replace('/[^\w\s\d\-_~,;\[\]\(\).]/', '~', $name);
 	}
 
-
 	/**
 	 * Reset the tag and return the new tag identifier.
 	 *
@@ -41,7 +43,6 @@ class FileTagSet extends TagSet
 	 */
 	public function resetTag($name)
 	{
-
         // Get the old tagId. When reseting a tag, a new id will be create
         $oldID = $this->store->get($this->tagKey($name));
 
@@ -56,5 +57,4 @@ class FileTagSet extends TagSet
 
         return parent::resetTag($name);
 	}
-
 }

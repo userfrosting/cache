@@ -20,7 +20,6 @@ use PHPUnit\Framework\TestCase;
  */
 class MemcachedTest extends TestCase
 {
-
     /**
      * Test memcached store
      */
