@@ -1,5 +1,11 @@
 # Cache module for UserFrosting 4.1
 
+[![Build Status](https://travis-ci.org/userfrosting/cache.svg?branch=master)](https://travis-ci.org/userfrosting/cache) [![Join the chat at https://chat.userfrosting.com/channel/support](https://demo.rocket.chat/images/join-chat.svg)](https://chat.userfrosting.com/channel/support) [![Backers on Open Collective](https://opencollective.com/userfrosting/backers/badge.svg)](#backers) [![Sponsors on Open Collective](https://opencollective.com/userfrosting/sponsors/badge.svg)](#sponsors)
+
+<a href="https://opencollective.com/userfrosting#backer" target="_blank">
+  <img src="https://opencollective.com/userfrosting/donate/button.png?color=blue" width=300 />
+</a>
+
 Louis Charette, 2017
 
 Wrapper function for *Laravel cache system* for easier integration of the cache system in standalone projects. Refer to [Laravel documentation](https://laravel.com/docs/5.4/cache) for all cache related function. This wrapper support Laravel `ArrayStore`, `FileStore`, `MemcachedStore` and `RedisStore`.
@@ -151,7 +157,7 @@ Before running unit testing, first make sure composer is up to the date (`compos
 
 From the base directory, use the following command to run **all** tests:
 ```
-vendor/bin/phpunit  tests
+vendor/bin/phpunit
 ```
 
 Driver specific tests and also be run :
