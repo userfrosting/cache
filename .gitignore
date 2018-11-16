@@ -2,3 +2,4 @@ vendor
 tests/cache
 composer.lock
 .php_cs.cache
+_meta

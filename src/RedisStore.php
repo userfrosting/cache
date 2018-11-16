@@ -59,12 +59,7 @@ class RedisStore extends ArrayStore
 
         // Register redis manager
         $this->app->singleton('redis', function ($app) use ($redisConfig) {
-            // Fallback to the old `Database` for Illuminate/Redis 5.3 and earlier
-            if (class_exists(RedisManager::class)) {
-                return new RedisManager('predis', $redisConfig);
-            } else {
-                return new Database($redisConfig);
-            }
+            return new RedisManager('predis', $redisConfig);
         });
     }
 }
