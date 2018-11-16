@@ -113,7 +113,7 @@ class TaggableFileStoreTest extends TestCase
         // Try again with tags
         $cache->tags('blah')->put('blah', "321", 60);
         $this->assertEquals("321", $cache->tags('blah')->get('blah'));
-        $this->assertTrue($cache->tags('blah')->flush());
+        $this->assertNull($cache->tags('blah')->flush());
         $this->assertNull($cache->tags('blah')->get('blah'));
     }
 }
