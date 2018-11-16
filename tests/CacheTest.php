@@ -49,6 +49,14 @@ class CacheTest extends TestCase
     }
 
     /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testArrayStoreThorwsExceptionOnBadStoreName()
+    {
+        $cacheStore = new ArrayStore(123);
+    }
+
+    /**
      * Test file store
      */
     public function testFileStore()
