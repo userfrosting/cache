@@ -2,9 +2,10 @@
 /**
  * UserFrosting (http://www.userfrosting.com)
  *
- * @link      https://github.com/userfrosting/Cache
- * @license   https://github.com/userfrosting/Cache/blob/master/licenses/UserFrosting.md (MIT License)
+ * @link      https://github.com/userfrosting/cache
+ * @license   https://github.com/userfrosting/cache/blob/master/LICENSE.md (MIT License)
  */
+
 namespace UserFrosting\Cache;
 
 use Illuminate\Cache\MemcachedConnector;
@@ -23,12 +24,11 @@ class MemcachedStore extends ArrayStore
      * Extend the `ArrayStore` contructor to accept the memcached server and
      * port configuraton
      *
-     * @param array $memcachedConfig (default: [])
-     * @param string $storeName (default: "default")
+     * @param array          $memcachedConfig (default: [])
+     * @param string         $storeName       (default: "default")
      * @param Container|null $app
-     * @return void
      */
-    public function __construct($memcachedConfig = [], $storeName = "default", Container $app = null)
+    public function __construct($memcachedConfig = [], $storeName = 'default', Container $app = null)
     {
 
         // Run the parent function to build base $app and $config
@@ -36,15 +36,15 @@ class MemcachedStore extends ArrayStore
 
         // Merge argument config with default one
         $memcachedConfig = array_merge([
-            'host' => '127.0.0.1',
-            'port' => 11211,
+            'host'   => '127.0.0.1',
+            'port'   => 11211,
             'weight' => 100,
             'prefix' => ''
         ], $memcachedConfig);
 
         // Memcached store requires a MemcachedConnector
-        $this->app->singleton('memcached.connector', function() {
-            return new MemcachedConnector;
+        $this->app->singleton('memcached.connector', function () {
+            return new MemcachedConnector();
         });
 
         // Setup the config for this file store
@@ -53,7 +53,7 @@ class MemcachedStore extends ArrayStore
             'prefix' => $memcachedConfig['prefix'],
             'stores' => [
                 $this->storeName => [
-                    'driver' => 'memcached',
+                    'driver'  => 'memcached',
                     'servers' => [
                         $memcachedConfig
                     ]

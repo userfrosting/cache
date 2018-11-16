@@ -2,9 +2,10 @@
 /**
  * UserFrosting (http://www.userfrosting.com)
  *
- * @link      https://github.com/userfrosting/Cache
- * @license   https://github.com/userfrosting/Cache/blob/master/licenses/UserFrosting.md (MIT License)
+ * @link      https://github.com/userfrosting/cache
+ * @license   https://github.com/userfrosting/cache/blob/master/LICENSE.md (MIT License)
  */
+
 namespace UserFrosting\Cache\Driver;
 
 use Illuminate\Cache\TaggedCache;
@@ -19,11 +20,11 @@ use Illuminate\Cache\TaggedCache;
  */
 class TaggedFileCache extends TaggedCache
 {
-	/**
-	 * {@inheritdoc}
-	 */
-	public function taggedItemKey($key)
-	{
-		return $this->tags->getNamespace() . $this->store->separator . $key;
-	}
+    /**
+     * {@inheritdoc}
+     */
+    public function taggedItemKey($key)
+    {
+        return $this->tags->getNamespace() . $this->store->separator . $key;
+    }
 }

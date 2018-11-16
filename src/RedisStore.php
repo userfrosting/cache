@@ -2,10 +2,11 @@
 /**
  * UserFrosting (http://www.userfrosting.com)
  *
- * @link      https://github.com/userfrosting/Cache
- * @license   https://github.com/userfrosting/Cache/blob/master/licenses/UserFrosting.md (MIT License)
+ * @link      https://github.com/userfrosting/cache
+ * @license   https://github.com/userfrosting/cache/blob/master/LICENSE.md (MIT License)
  */
- namespace UserFrosting\Cache;
+
+namespace UserFrosting\Cache;
 
 use Illuminate\Container\Container;
 use Illuminate\Redis\RedisManager;
@@ -24,12 +25,11 @@ class RedisStore extends ArrayStore
      * Extend the `ArrayStore` contructor to accept the redis server and
      * port configuraton
      *
-     * @param mixed $redisServer (default: [])
-     * @param string $storeName (default: "default")
+     * @param mixed          $redisServer (default: [])
+     * @param string         $storeName   (default: "default")
      * @param Container|null $app
-     * @return void
      */
-    public function __construct($redisServer = [], $storeName = "default", Container $app = null)
+    public function __construct($redisServer = [], $storeName = 'default', Container $app = null)
     {
 
         // Run the parent function to build base $app and $config
@@ -38,11 +38,11 @@ class RedisStore extends ArrayStore
         // Setup Redis server config
         $redisConfig = [
             'default' => array_merge([
-                'host' => '127.0.0.1',
+                'host'     => '127.0.0.1',
                 'password' => null,
-                'port' => 6379,
+                'port'     => 6379,
                 'database' => 0,
-                'prefix' => ''
+                'prefix'   => ''
             ], $redisServer)
         ];
 
@@ -51,7 +51,7 @@ class RedisStore extends ArrayStore
             'prefix' => $redisConfig['default']['prefix'],
             'stores' => [
                 $this->storeName => [
-                    'driver' => 'redis',
+                    'driver'     => 'redis',
                     'connection' => 'default'
                 ]
             ]

@@ -2,9 +2,10 @@
 /**
  * UserFrosting (http://www.userfrosting.com)
  *
- * @link      https://github.com/userfrosting/Cache
- * @license   https://github.com/userfrosting/Cache/blob/master/licenses/UserFrosting.md (MIT License)
+ * @link      https://github.com/userfrosting/cache
+ * @license   https://github.com/userfrosting/cache/blob/master/LICENSE.md (MIT License)
  */
+
 namespace UserFrosting\Cache;
 
 use Illuminate\Cache\CacheManager;
@@ -42,19 +43,17 @@ class ArrayStore
     /**
      * Create the empty Illuminate Container and required config
      *
-     * @param string $storeName (default: "default")
-     * @param Container|null $app (default: null)
-     * @return void
+     * @param string         $storeName (default: "default")
+     * @param Container|null $app       (default: null)
      */
-    function __construct($storeName = "default", Container $app = null)
+    public function __construct($storeName = 'default', Container $app = null)
     {
         $this->storeName = $storeName;
         $this->config = new Repository();
 
         //Throw InvalidArgumentException if namespace argument is not valid
-        if (!is_string($this->storeName) || $this->storeName == "")
-        {
-            throw new \InvalidArgumentException("Store name is not a valid string");
+        if (!is_string($this->storeName) || $this->storeName == '') {
+            throw new \InvalidArgumentException('Store name is not a valid string');
         }
 
         // Resuse the ctor $app is it exist
@@ -76,11 +75,12 @@ class ArrayStore
     public function instance()
     {
         $config = $this->config;
-        $this->app->singleton('config', function() use ($config) {
+        $this->app->singleton('config', function () use ($config) {
             return $config;
         });
 
         $cacheManager = new CacheManager($this->app);
+
         return $cacheManager->store($this->storeName);
     }
 }
