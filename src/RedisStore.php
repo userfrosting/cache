@@ -59,7 +59,11 @@ class RedisStore extends ArrayStore
 
         // Register redis manager
         $this->app->singleton('redis', function ($app) use ($redisConfig) {
-            return new RedisManager('predis', $redisConfig);
+            try {
+                return new RedisManager('predis', $redisConfig);
+            } catch (\ArgumentCountError $e) {
+                return new RedisManager($app, 'predis', $redisConfig);
+            }
         });
     }
 }

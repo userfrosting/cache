@@ -83,7 +83,7 @@ class RedisTest extends TestCase
         // Try again with tags
         $cache->tags('blah')->put('blah', "321", 60);
         $this->assertEquals("321", $cache->tags('blah')->get('blah'));
-        $this->assertNull($cache->tags('blah')->flush());
+        $cache->tags('blah')->flush(); // $this->assertTrue($cache->tags('blah')->flush()); <-- Returns null pre 5.7
         $this->assertNull($cache->tags('blah')->get('blah'));
     }
 }
