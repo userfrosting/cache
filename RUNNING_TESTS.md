@@ -19,7 +19,7 @@ To test the Memcached driver (not to be confused with *memcache*), you'll need t
 ## Running
 Once the prerequisites are installed, run the tests from the project root directory:
 ```
-vendor/bin/phpunit tests
+vendor/bin/phpunit
 ```
 
 If the tests are successful, you should see something similar to this. Otherwise, the errors will be displayed.

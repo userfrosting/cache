@@ -1,6 +1,10 @@
-# Cache module for UserFrosting 4.1
+# Cache module for UserFrosting 4
 
-[![Build Status](https://travis-ci.org/userfrosting/cache.svg?branch=master)](https://travis-ci.org/userfrosting/cache) [![Join the chat at https://chat.userfrosting.com/channel/support](https://demo.rocket.chat/images/join-chat.svg)](https://chat.userfrosting.com/channel/support) [![Backers on Open Collective](https://opencollective.com/userfrosting/backers/badge.svg)](#backers) [![Sponsors on Open Collective](https://opencollective.com/userfrosting/sponsors/badge.svg)](#sponsors)
+[![Build Status](https://travis-ci.org/userfrosting/cache.svg?branch=master)](https://travis-ci.org/userfrosting/cache)
+[![codecov](https://codecov.io/gh/userfrosting/cache/branch/master/graph/badge.svg)](https://codecov.io/gh/userfrosting/cache)
+[![Join the chat at https://chat.userfrosting.com/channel/support](https://demo.rocket.chat/images/join-chat.svg)](https://chat.userfrosting.com/channel/support)
+[![Backers on Open Collective](https://opencollective.com/userfrosting/backers/badge.svg)](#backers)
+[![Sponsors on Open Collective](https://opencollective.com/userfrosting/sponsors/badge.svg)](#sponsors)
 
 <a href="https://opencollective.com/userfrosting#backer" target="_blank">
   <img src="https://opencollective.com/userfrosting/donate/button.png?color=blue" width=300 />
