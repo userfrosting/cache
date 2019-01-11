@@ -33,7 +33,6 @@ matrix:
       env: LARAVEL_VERSION=5.7.*
 
 before_install:
-  - phpenv config-rm xdebug.ini || true
   - echo "extension = memcached.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
   - printf "\n" | pecl install -f redis
 
