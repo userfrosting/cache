@@ -21,7 +21,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ## 4.1.0 - 2017-06-14
 Initial release
 
-[4.2.0]: https://github.com/userfrosting/cache/compare/4.1.1...4.2.0
-[4.1.1]: https://github.com/userfrosting/cache/compare/4.1.0...4.1.1
+[4.2.0]: https://github.com/userfrosting/cache/compare/4.1.2...4.2.0
 [4.1.2]: https://github.com/userfrosting/cache/compare/4.1.1...4.1.2
+[4.1.1]: https://github.com/userfrosting/cache/compare/4.1.0...4.1.1
 [#1]: https://github.com/userfrosting/cache/issues/1
