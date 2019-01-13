@@ -152,23 +152,6 @@ $cache = $cacheStore->instance();
 $cache->get(...);
 ```
 
-## Testing
+## [Style Guide](STYLE-GUIDE.md)
 
-Before running unit testing, first make sure composer is up to the date (`composer update`). To successfully run all tests, you should also have Memcached and Redis already installed and working. Those tests use the default server and port for each driver. If your environment uses non-default server and port, you might need to edits the test files.
-
-From the base directory, use the following command to run **all** tests:
-```
-vendor/bin/phpunit
-```
-
-Driver specific tests and also be run :
-```
-# Basic and FileStore related tests
-vendor/bin/phpunit  tests/CacheTest
-
-# Memcached related tests
-vendor/bin/phpunit  tests/MemcachedTest
-
-# Redis related tests
-vendor/bin/phpunit  tests/RedisTest
-```
+## [Testing](RUNNING_TESTS.md)

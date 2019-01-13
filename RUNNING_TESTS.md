@@ -32,3 +32,16 @@ Time: 41 ms, Memory: 3.75MB
 
 OK (1 test, 18 assertions)
 ```
+
+To successfully run all tests, you should have Memcached and Redis already installed and working. Those tests use the default server and port for each driver. If your environment uses non-default server and port, you might need to edits the test files. Driver specific tests and also be run :
+
+```
+# Basic and FileStore related tests
+vendor/bin/phpunit  tests/CacheTest
+
+# Memcached related tests
+vendor/bin/phpunit  tests/MemcachedTest
+
+# Redis related tests
+vendor/bin/phpunit  tests/RedisTest
+```

@@ -1,8 +1,9 @@
 <?php
 
-$header = 'UserFrosting (http://www.userfrosting.com)
+$header = 'UserFrosting Cache (http://www.userfrosting.com)
 
 @link      https://github.com/userfrosting/cache
+@copyright Copyright (c) 2013-2019 Alexander Weissman
 @license   https://github.com/userfrosting/cache/blob/master/LICENSE.md (MIT License)';
 
 $rules = [
