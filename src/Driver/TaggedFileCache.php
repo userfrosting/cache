@@ -13,7 +13,7 @@ namespace UserFrosting\Cache\Driver;
 use Illuminate\Cache\TaggedCache;
 
 /**
- * TaggedFileCache Class
+ * TaggedFileCache Class.
  *
  * Custom file based cache driver with supports for Tags
  * Inspired by unikent/taggedFileCache
@@ -27,6 +27,6 @@ class TaggedFileCache extends TaggedCache
      */
     public function taggedItemKey($key)
     {
-        return $this->tags->getNamespace() . $this->store->separator . $key;
+        return $this->tags->getNamespace().$this->store->separator.$key;
     }
 }

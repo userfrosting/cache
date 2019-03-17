@@ -14,7 +14,7 @@ use Illuminate\Cache\FileStore;
 use Illuminate\Filesystem\Filesystem;
 
 /**
- * TaggableFileStore Class
+ * TaggableFileStore Class.
  *
  * Custom file based cache driver with supports for Tags
  * Inspired by unikent/taggedFileCache
@@ -48,7 +48,7 @@ class TaggableFileStore extends FileStore
     public function __construct(Filesystem $files, $directory, $options)
     {
         $options = array_merge([
-            'separator'=> '~#~'
+            'separator'=> '~#~',
         ], $options);
 
         $this->separator = $options['separator'];
@@ -58,7 +58,8 @@ class TaggableFileStore extends FileStore
     /**
      * Get the full path for the given cache key.
      *
-     * @param  string $key
+     * @param string $key
+     *
      * @return string
      */
     protected function path($key)
@@ -67,9 +68,9 @@ class TaggableFileStore extends FileStore
         $split = explode($this->separator, $key);
 
         if (count($split) > 1) {
-            $folder = reset($split) . $this->ds;
+            $folder = reset($split).$this->ds;
 
-            if ($folder === $this->tagRepository . $this->ds) {
+            if ($folder === $this->tagRepository.$this->ds) {
                 $isTag = true;
             }
             $key = end($split);
@@ -85,13 +86,14 @@ class TaggableFileStore extends FileStore
             $parts = array_slice(str_split($hash = sha1($key), 2), 0, 2);
         }
 
-        return $this->directory . $this->ds . $folder . (count($parts) > 0 ? implode($this->ds, $parts) . $this->ds : '') . $hash;
+        return $this->directory.$this->ds.$folder.(count($parts) > 0 ? implode($this->ds, $parts).$this->ds : '').$hash;
     }
 
     /**
      * Begin executing a new tags operation.
      *
-     * @param  array|mixed     $names
+     * @param array|mixed $names
+     *
      * @return TaggedFileCache
      */
     public function tags($names)
@@ -100,7 +102,7 @@ class TaggableFileStore extends FileStore
     }
 
     /**
-     * Flush old tags path when a tag is flushed
+     * Flush old tags path when a tag is flushed.
      *
      * @param string $tagId
      */

@@ -14,7 +14,7 @@ use Illuminate\Container\Container;
 use Illuminate\Filesystem\Filesystem;
 
 /**
- * FileStore Class
+ * FileStore Class.
  *
  * Setup a cache instance in a defined namespace using the `file` driver
  *
@@ -24,7 +24,7 @@ class FileStore extends ArrayStore
 {
     /**
      * Extend the `ArrayStore` contructor to accept the file driver $path
-     * config and setup the necessary config
+     * config and setup the necessary config.
      *
      * @param string         $path      (default: "./")
      * @param string         $storeName (default: "default")
@@ -45,8 +45,8 @@ class FileStore extends ArrayStore
         $this->config['cache.stores'] = [
             $this->storeName => [
                 'driver' => 'file',
-                'path'   => $path
-            ]
+                'path'   => $path,
+            ],
         ];
     }
 }

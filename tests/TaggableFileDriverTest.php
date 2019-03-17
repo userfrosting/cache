@@ -1,42 +1,37 @@
 <?php
 
-/**
- * TaggableFileDriverTest
+/*
+ * UserFrosting Cache (http://www.userfrosting.com)
  *
- * Tests for the custom `TaggableFileStore` driver
- * Inspired by https://github.com/unikent/taggedFileCache/tree/master/tests
- *
- * @package   userfrosting/Cache
- * @link      https://github.com/userfrosting/Cache
- * @author    Louis Charette
- * @license   https://github.com/userfrosting/UserFrosting/blob/master/LICENSE.md (MIT License)
+ * @link      https://github.com/userfrosting/cache
+ * @copyright Copyright (c) 2013-2019 Alexander Weissman
+ * @license   https://github.com/userfrosting/cache/blob/master/LICENSE.md (MIT License)
  */
 
 namespace UserFrosting\Cache;
 
-use PHPUnit\Framework\TestCase;
 use Illuminate\Filesystem\Filesystem;
-use UserFrosting\Cache\Driver\TaggableFileStore;
-use UserFrosting\Cache\Driver\FileTagSet;
-use UserFrosting\Cache\Driver\TaggedFileCache;
 use Mockery;
+use PHPUnit\Framework\TestCase;
+use UserFrosting\Cache\Driver\FileTagSet;
+use UserFrosting\Cache\Driver\TaggableFileStore;
+use UserFrosting\Cache\Driver\TaggedFileCache;
 
 class TaggableFileDriverTest extends TestCase
 {
-
     public $file;
     public $path;
 
     public function setup()
     {
         $this->file = new Filesystem();
-        $this->path = "./tests/cache";
+        $this->path = './tests/cache';
     }
 
     public function testTagKeyGeneratesPrefixedKey()
     {
         $store = new TaggableFileStore($this->file, $this->path, []);
-        $tagSet = new FileTagSet($store,['foobar']);
+        $tagSet = new FileTagSet($store, ['foobar']);
         $this->assertEquals('cache_tags~#~foobar', $tagSet->tagKey('foobar'));
     }
 
@@ -45,10 +40,9 @@ class TaggableFileDriverTest extends TestCase
         $store = new TaggableFileStore($this->file, $this->path, [
             'separator'=> '~|~',
         ]);
-        $tagSet = new FileTagSet($store,['foobar']);
-        $this->assertEquals('cache_tags~|~foobar',$tagSet->tagKey('foobar'));
+        $tagSet = new FileTagSet($store, ['foobar']);
+        $this->assertEquals('cache_tags~|~foobar', $tagSet->tagKey('foobar'));
     }
-
 
     public function testPathGeneratesCorrectPathfoKeyWithoutSeparator()
     {
@@ -56,7 +50,7 @@ class TaggableFileDriverTest extends TestCase
 
         $store = new TaggableFileStore($this->file, $this->path, []);
         $reflectionMethod->setAccessible(true);
-        $path =  $reflectionMethod->invoke($store, 'foobar');
+        $path = $reflectionMethod->invoke($store, 'foobar');
 
         $this->assertTrue(str_contains($path, $this->path));
         $this->assertTrue(str_replace($this->path, '', $path) === '/88/43/8843d7f92416211de9ebb963ff4ce28125932878');
@@ -68,7 +62,7 @@ class TaggableFileDriverTest extends TestCase
 
         $store = new TaggableFileStore($this->file, $this->path, []);
         $reflectionMethod->setAccessible(true);
-        $path =  $reflectionMethod->invoke($store, 'boofar~#~foobar');
+        $path = $reflectionMethod->invoke($store, 'boofar~#~foobar');
 
         $this->assertTrue(str_contains($path, $this->path));
         $this->assertTrue(str_replace($this->path, '', $path) === '/boofar/88/43/8843d7f92416211de9ebb963ff4ce28125932878');
@@ -80,18 +74,17 @@ class TaggableFileDriverTest extends TestCase
 
         $store = new TaggableFileStore($this->file, $this->path, ['separator' => '~|~']);
         $reflectionMethod->setAccessible(true);
-        $path =  $reflectionMethod->invoke($store, 'boofar~|~foobar');
+        $path = $reflectionMethod->invoke($store, 'boofar~|~foobar');
 
-        $this->assertTrue(str_contains($path,$this->path));
+        $this->assertTrue(str_contains($path, $this->path));
         $this->assertTrue(str_replace($this->path, '', $path) === '/boofar/88/43/8843d7f92416211de9ebb963ff4ce28125932878');
-
     }
 
     public function testTagsReturnsTaggedFileCache()
     {
         $store = new TaggableFileStore($this->file, $this->path, []);
 
-        $cache = $store->tags(['abc','def']);
+        $cache = $store->tags(['abc', 'def']);
 
         $this->assertInstanceOf(TaggedFileCache::class, $cache);
     }
@@ -106,7 +99,7 @@ class TaggableFileDriverTest extends TestCase
             'foobar',
             'testfoobar',
             'testfoobartest',
-            'test/testfoobartest'
+            'test/testfoobartest',
         ]);
 
         $filesMock->shouldReceive('deleteDirectory')->with('test/foobar')->once();
@@ -126,7 +119,7 @@ class TaggableFileDriverTest extends TestCase
         $filesMock->shouldReceive('directories')->with('/')->andReturn([
            'test/foobar/foo',
            'foobar/test',
-           'test'
+           'test',
         ]);
 
         $filesMock->shouldNotReceive('deleteDirectory')->with('test/foobar/foo');
@@ -135,7 +128,6 @@ class TaggableFileDriverTest extends TestCase
 
         $store->flushOldTag('foobar');
     }
-
 
     public function testItemKeyCallsTaggedItemKey()
     {
@@ -160,7 +152,6 @@ class TaggableFileDriverTest extends TestCase
 
         $this->assertEquals('boofar', $mock->itemKey('test'));
     }
-
 
     public function tearDown()
     {

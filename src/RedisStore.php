@@ -14,7 +14,7 @@ use Illuminate\Container\Container;
 use Illuminate\Redis\RedisManager;
 
 /**
- * RedisStore Class
+ * RedisStore Class.
  *
  * Setup a cache instance in a defined namespace using the `redis` driver
  *
@@ -24,7 +24,7 @@ class RedisStore extends ArrayStore
 {
     /**
      * Extend the `ArrayStore` contructor to accept the redis server and
-     * port configuraton
+     * port configuraton.
      *
      * @param mixed          $redisServer (default: [])
      * @param string         $storeName   (default: "default")
@@ -43,8 +43,8 @@ class RedisStore extends ArrayStore
                 'password' => null,
                 'port'     => 6379,
                 'database' => 0,
-                'prefix'   => ''
-            ], $redisServer)
+                'prefix'   => '',
+            ], $redisServer),
         ];
 
         // Setup the config for this file store
@@ -53,9 +53,9 @@ class RedisStore extends ArrayStore
             'stores' => [
                 $this->storeName => [
                     'driver'     => 'redis',
-                    'connection' => 'default'
-                ]
-            ]
+                    'connection' => 'default',
+                ],
+            ],
         ];
 
         // Register redis manager

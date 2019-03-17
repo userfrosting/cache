@@ -16,7 +16,7 @@ use Illuminate\Filesystem\Filesystem;
 use UserFrosting\Cache\Driver\TaggableFileStore as TaggableFileDriver;
 
 /**
- * TaggableFileStore Class
+ * TaggableFileStore Class.
  *
  * Setup a cache instance using the custom `tfile` driver
  *
@@ -26,7 +26,7 @@ class TaggableFileStore extends ArrayStore
 {
     /**
      * Extend the `ArrayStore` contructor to accept the tfile driver $path
-     * config and setup the necessary config
+     * config and setup the necessary config.
      *
      * @param string         $path      (default: "./")
      * @param string         $storeName (default: "default")
@@ -46,8 +46,8 @@ class TaggableFileStore extends ArrayStore
         $this->config['cache.stores'] = [
             $this->storeName => [
                 'driver' => 'tfile',
-                'path'   => $path
-            ]
+                'path'   => $path,
+            ],
         ];
     }
 
