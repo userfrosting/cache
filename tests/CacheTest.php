@@ -1,14 +1,11 @@
 <?php
 
-/**
- * CacheTest
+/*
+ * UserFrosting Cache (http://www.userfrosting.com)
  *
- * Tests for `ArrayStore` and `FileStore`
- *
- * @package   userfrosting/Cache
- * @link      https://github.com/userfrosting/Cache
- * @author    Louis Charette
- * @license   https://github.com/userfrosting/UserFrosting/blob/master/LICENSE.md (MIT License)
+ * @link      https://github.com/userfrosting/cache
+ * @copyright Copyright (c) 2013-2019 Alexander Weissman
+ * @license   https://github.com/userfrosting/cache/blob/master/LICENSE.md (MIT License)
  */
 
 namespace UserFrosting\Cache;
@@ -19,12 +16,13 @@ class CacheTest extends TestCase
 {
     public $storage;
 
-    public function setup() {
-        $this->storage = "./tests/cache/FileStore";
+    public function setup()
+    {
+        $this->storage = './tests/cache/FileStore';
     }
 
     /**
-     * Test basic array store
+     * Test basic array store.
      */
     public function testArrayStore()
     {
@@ -33,8 +31,8 @@ class CacheTest extends TestCase
         $cache = $cacheStore->instance();
 
         // Store "foo" and try to read it
-        $cache->forever("foo", "array");
-        $this->assertEquals("array", $cache->get('foo'));
+        $cache->forever('foo', 'array');
+        $this->assertEquals('array', $cache->get('foo'));
     }
 
     public function testArrayStorePersistence()
@@ -45,7 +43,7 @@ class CacheTest extends TestCase
 
         // Doesn't store anything, just tried to read the last one
         // Won't work, because array doesn't save anything
-        $this->assertNotEquals("array", $cache->get('foo'));
+        $this->assertNotEquals('array', $cache->get('foo'));
     }
 
     /**
@@ -57,7 +55,7 @@ class CacheTest extends TestCase
     }
 
     /**
-     * Test file store
+     * Test file store.
      */
     public function testFileStore()
     {
@@ -66,8 +64,8 @@ class CacheTest extends TestCase
         $cache = $cacheStore->instance();
 
         // Store "foo" and try to read it
-        $cache->forever("foo", "bar");
-        $this->assertEquals("bar", $cache->get('foo'));
+        $cache->forever('foo', 'bar');
+        $this->assertEquals('bar', $cache->get('foo'));
     }
 
     public function testFileStorePersistence()
@@ -77,7 +75,7 @@ class CacheTest extends TestCase
         $cache = $cacheStore->instance();
 
         // Doesn't store anything, just tried to read the last one
-        $this->assertEquals("bar", $cache->get('foo'));
+        $this->assertEquals('bar', $cache->get('foo'));
     }
 
     /*public function testReuseApp()

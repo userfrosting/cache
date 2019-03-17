@@ -14,7 +14,7 @@ use Illuminate\Cache\MemcachedConnector;
 use Illuminate\Container\Container;
 
 /**
- * MemcachedStore Class
+ * MemcachedStore Class.
  *
  * Setup a cache instance in a defined namespace using the `memcached` driver
  *
@@ -24,7 +24,7 @@ class MemcachedStore extends ArrayStore
 {
     /**
      * Extend the `ArrayStore` contructor to accept the memcached server and
-     * port configuraton
+     * port configuraton.
      *
      * @param array          $memcachedConfig (default: [])
      * @param string         $storeName       (default: "default")
@@ -41,7 +41,7 @@ class MemcachedStore extends ArrayStore
             'host'   => '127.0.0.1',
             'port'   => 11211,
             'weight' => 100,
-            'prefix' => ''
+            'prefix' => '',
         ], $memcachedConfig);
 
         // Memcached store requires a MemcachedConnector
@@ -57,10 +57,10 @@ class MemcachedStore extends ArrayStore
                 $this->storeName => [
                     'driver'  => 'memcached',
                     'servers' => [
-                        $memcachedConfig
-                    ]
-                ]
-            ]
+                        $memcachedConfig,
+                    ],
+                ],
+            ],
         ];
     }
 }

@@ -16,7 +16,7 @@ use Illuminate\Container\Container;
 use Illuminate\Contracts\Cache\Store;
 
 /**
- * ArrayStore Class
+ * ArrayStore Class.
  *
  * Class used to setup a cache instance in a defined namespace
  * Uses the `array` driver by default. This driver is a dummy one that doesn't
@@ -43,7 +43,7 @@ class ArrayStore
     protected $storeName;
 
     /**
-     * Create the empty Illuminate Container and required config
+     * Create the empty Illuminate Container and required config.
      *
      * @param string         $storeName (default: "default")
      * @param Container|null $app       (default: null)
@@ -64,13 +64,13 @@ class ArrayStore
         // Setup an array store
         $this->config['cache.stores'] = [
             $this->storeName => [
-                'driver' => 'array'
-            ]
+                'driver' => 'array',
+            ],
         ];
     }
 
     /**
-     * Return the store instance from the Laravel CacheManager
+     * Return the store instance from the Laravel CacheManager.
      *
      * @return Store Laravel Cache instance
      */
