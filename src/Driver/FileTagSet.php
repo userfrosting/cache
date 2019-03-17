@@ -1,5 +1,6 @@
 <?php
-/**
+
+/*
  * UserFrosting Cache (http://www.userfrosting.com)
  *
  * @link      https://github.com/userfrosting/cache
