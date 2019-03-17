@@ -2,10 +2,13 @@
 
 [![Latest Version](https://img.shields.io/github/release/userfrosting/cache.svg)](https://github.com/userfrosting/cache/releases)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE.md)
-[![Build Status](https://travis-ci.org/userfrosting/cache.svg?branch=master)](https://travis-ci.org/userfrosting/cache)
-[![codecov](https://codecov.io/gh/userfrosting/cache/branch/master/graph/badge.svg)](https://codecov.io/gh/userfrosting/cache)
 [![Join the chat at https://chat.userfrosting.com/channel/support](https://demo.rocket.chat/images/join-chat.svg)](https://chat.userfrosting.com/channel/support)
 [![Donate](https://img.shields.io/badge/Open%20Collective-Donate-blue.svg)](https://opencollective.com/userfrosting#backer)
+
+| Branch | Status |
+| ------ | ------ |
+| master | [![Build Status](https://travis-ci.org/userfrosting/cache.svg?branch=master)](https://travis-ci.org/userfrosting/cache) [![codecov](https://codecov.io/gh/userfrosting/cache/branch/master/graph/badge.svg)](https://codecov.io/gh/userfrosting/cache/branch/master) [![StyleCI](https://github.styleci.io/repos/82357058/shield?branch=master)](https://github.styleci.io/repos/82357058) |
+| develop | [![Build Status](https://travis-ci.org/userfrosting/cache.svg?branch=develop)](https://travis-ci.org/userfrosting/cache) [![codecov](https://codecov.io/gh/userfrosting/cache/branch/develop/graph/badge.svg)](https://codecov.io/gh/userfrosting/cache/branch/develop) [![StyleCI](https://github.styleci.io/repos/82357058/shield?branch=develop)](https://github.styleci.io/repos/82357058) |
 
 Louis Charette, 2017
 
