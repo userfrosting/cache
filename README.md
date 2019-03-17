@@ -5,10 +5,25 @@
 [![Join the chat at https://chat.userfrosting.com/channel/support](https://demo.rocket.chat/images/join-chat.svg)](https://chat.userfrosting.com/channel/support)
 [![Donate](https://img.shields.io/badge/Open%20Collective-Donate-blue.svg)](https://opencollective.com/userfrosting#backer)
 
-| Branch | Status |
-| ------ | ------ |
-| master | [![Build Status](https://travis-ci.org/userfrosting/cache.svg?branch=master)](https://travis-ci.org/userfrosting/cache) [![codecov](https://codecov.io/gh/userfrosting/cache/branch/master/graph/badge.svg)](https://codecov.io/gh/userfrosting/cache/branch/master) [![StyleCI](https://github.styleci.io/repos/82357058/shield?branch=master)](https://github.styleci.io/repos/82357058) |
-| develop | [![Build Status](https://travis-ci.org/userfrosting/cache.svg?branch=develop)](https://travis-ci.org/userfrosting/cache) [![codecov](https://codecov.io/gh/userfrosting/cache/branch/develop/graph/badge.svg)](https://codecov.io/gh/userfrosting/cache/branch/develop) [![StyleCI](https://github.styleci.io/repos/82357058/shield?branch=develop)](https://github.styleci.io/repos/82357058) |
+| Branch | Build | Coverage | Style |
+| ------ |:-----:|:--------:|:-----:|
+| [master][Cache]  | [![][cache-master-build]][cache-travis] | [![][cache-master-codecov]][cache-codecov] | [![][cache-style-master]][cache-style] |
+| [develop][cache-develop] | [![][cache-develop-build]][cache-travis] | [![][cache-develop-codecov]][cache-codecov] | [![][cache-style-develop]][cache-style] |
+
+<!-- Links -->
+[Cache]: https://github.com/userfrosting/cache
+[cache-develop]: https://github.com/userfrosting/cache/tree/develop
+[cache-version]: https://img.shields.io/github/release/userfrosting/cache.svg
+[cache-master-build]: https://travis-ci.org/userfrosting/cache.svg?branch=master
+[cache-master-codecov]: https://codecov.io/gh/userfrosting/cache/branch/master/graph/badge.svg
+[cache-develop-build]: https://travis-ci.org/userfrosting/cache.svg?branch=develop
+[cache-develop-codecov]: https://codecov.io/gh/userfrosting/cache/branch/develop/graph/badge.svg
+[cache-releases]: https://github.com/userfrosting/cache/releases
+[cache-travis]: https://travis-ci.org/userfrosting/cache
+[cache-codecov]: https://codecov.io/gh/userfrosting/cache
+[cache-style-master]: https://github.styleci.io/repos/82357058/shield?branch=master&style=flat
+[cache-style-develop]: https://github.styleci.io/repos/82357058/shield?branch=develop&style=flat
+[cache-style]: https://github.styleci.io/repos/82357058
 
 Louis Charette, 2017
 
