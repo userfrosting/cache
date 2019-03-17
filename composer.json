@@ -16,7 +16,7 @@
         "illuminate/cache": "^5.4",
         "illuminate/filesystem": "^5.4",
         "illuminate/container": "^5.4",
-        "illuminate/Config": "^5.4",
+        "illuminate/config": "^5.4",
         "illuminate/redis": "^5.4",
         "predis/predis": "~1.0"
     },
