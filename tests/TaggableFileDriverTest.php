@@ -117,9 +117,9 @@ class TaggableFileDriverTest extends TestCase
         $store = new TaggableFileStore($filesMock, '/', []);
 
         $filesMock->shouldReceive('directories')->with('/')->andReturn([
-           'test/foobar/foo',
-           'foobar/test',
-           'test',
+            'test/foobar/foo',
+            'foobar/test',
+            'test',
         ]);
 
         $filesMock->shouldNotReceive('deleteDirectory')->with('test/foobar/foo');
