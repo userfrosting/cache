@@ -13,6 +13,7 @@ namespace UserFrosting\Cache;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
 use Mockery;
+use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use PHPUnit\Framework\TestCase;
 use UserFrosting\Cache\Driver\FileTagSet;
 use UserFrosting\Cache\Driver\TaggableFileStore;
@@ -20,6 +21,8 @@ use UserFrosting\Cache\Driver\TaggedFileCache;
 
 class TaggableFileDriverTest extends TestCase
 {
+    use MockeryPHPUnitIntegration;
+
     public $file;
     public $path;
 
