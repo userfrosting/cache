@@ -12,6 +12,7 @@ namespace UserFrosting\Cache\Driver;
 
 use Illuminate\Cache\FileStore;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Str;
 
 /**
  * TaggableFileStore Class.
@@ -109,7 +110,7 @@ class TaggableFileStore extends FileStore
     public function flushOldTag($tagId)
     {
         foreach ($this->files->directories($this->directory) as $directory) {
-            if (str_contains(basename($directory), $tagId)) {
+            if (Str::contains(basename($directory), $tagId)) {
                 $this->files->deleteDirectory($directory);
             }
         }

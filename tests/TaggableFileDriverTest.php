@@ -11,7 +11,9 @@
 namespace UserFrosting\Cache;
 
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Str;
 use Mockery;
+use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use PHPUnit\Framework\TestCase;
 use UserFrosting\Cache\Driver\FileTagSet;
 use UserFrosting\Cache\Driver\TaggableFileStore;
@@ -19,6 +21,8 @@ use UserFrosting\Cache\Driver\TaggedFileCache;
 
 class TaggableFileDriverTest extends TestCase
 {
+    use MockeryPHPUnitIntegration;
+
     public $file;
     public $path;
 
@@ -52,7 +56,7 @@ class TaggableFileDriverTest extends TestCase
         $reflectionMethod->setAccessible(true);
         $path = $reflectionMethod->invoke($store, 'foobar');
 
-        $this->assertTrue(str_contains($path, $this->path));
+        $this->assertTrue(Str::contains($path, $this->path));
         $this->assertTrue(str_replace($this->path, '', $path) === '/88/43/8843d7f92416211de9ebb963ff4ce28125932878');
     }
 
@@ -64,7 +68,7 @@ class TaggableFileDriverTest extends TestCase
         $reflectionMethod->setAccessible(true);
         $path = $reflectionMethod->invoke($store, 'boofar~#~foobar');
 
-        $this->assertTrue(str_contains($path, $this->path));
+        $this->assertTrue(Str::contains($path, $this->path));
         $this->assertTrue(str_replace($this->path, '', $path) === '/boofar/88/43/8843d7f92416211de9ebb963ff4ce28125932878');
     }
 
@@ -76,7 +80,7 @@ class TaggableFileDriverTest extends TestCase
         $reflectionMethod->setAccessible(true);
         $path = $reflectionMethod->invoke($store, 'boofar~|~foobar');
 
-        $this->assertTrue(str_contains($path, $this->path));
+        $this->assertTrue(Str::contains($path, $this->path));
         $this->assertTrue(str_replace($this->path, '', $path) === '/boofar/88/43/8843d7f92416211de9ebb963ff4ce28125932878');
     }
 
