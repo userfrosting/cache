@@ -89,13 +89,6 @@ class TaggableFileStoreTest extends TestCase
         $this->assertEquals('blue', $cache->tags(['foo', 'blue'])->get('bar'));
     }
 
-    public function testFlushingTaggableFileStore()
-    {
-        $cacheStore = new TaggableFileStore($this->storage);
-        $cache = $cacheStore->instance();
-        $cache->flush();
-    }
-
     public function testTagsFlush()
     {
         // Get store

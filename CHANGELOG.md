@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ## [4.4.1]
 - Fix TypeError with `str_contains` ([#5])
+- Fix tests
 
 ## [4.4.0]
 - Version bump
