@@ -16,7 +16,7 @@ class TaggableFileStoreTest extends TestCase
 {
     public $storage;
 
-    public function setup()
+    public function setup(): void
     {
         $this->storage = './tests/cache/TaggableFileStore';
     }
