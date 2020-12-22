@@ -33,10 +33,12 @@ jobs:
       run: composer require "illuminate/redis:${{ matrix.laravel }}" --no-update
     - name: Install Dependencies
       run: composer install --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
-    - name: Start Redis
+    - name: Setup Redis-server
       uses: supercharge/redis-github-action@1.1.0
       with:
         redis-version: 6
+    - name: Setup Memcached
+      uses: niden/actions-memcached@v7
     - name: Execute tests via PHPUnit
       run: vendor/bin/phpunit
     - name: Upload coverage to Codecov
