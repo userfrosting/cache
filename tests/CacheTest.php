@@ -16,7 +16,7 @@ class CacheTest extends TestCase
 {
     public $storage;
 
-    public function setup()
+    public function setup(): void
     {
         $this->storage = './tests/cache/FileStore';
     }
@@ -46,12 +46,10 @@ class CacheTest extends TestCase
         $this->assertNotEquals('array', $cache->get('foo'));
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testArrayStoreThorwsExceptionOnBadStoreName()
     {
-        $cacheStore = new ArrayStore(123);
+        $this->expectException(\InvalidArgumentException::class);
+        new ArrayStore(123);
     }
 
     /**

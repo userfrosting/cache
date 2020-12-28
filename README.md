@@ -2,7 +2,7 @@
 
 [![Latest Version](https://img.shields.io/github/release/userfrosting/cache.svg)](https://github.com/userfrosting/cache/releases)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE.md)
-[![Join the chat at https://chat.userfrosting.com/channel/support](https://demo.rocket.chat/images/join-chat.svg)](https://chat.userfrosting.com/channel/support)
+[![Join the chat at https://chat.userfrosting.com/channel/support](https://chat.userfrosting.com/api/v1/shield.svg?name=UserFrosting)](https://chat.userfrosting.com/channel/support)
 [![Donate](https://img.shields.io/badge/Open%20Collective-Donate-blue.svg)](https://opencollective.com/userfrosting#backer)
 
 | Branch | Build | Coverage | Style |
@@ -14,12 +14,12 @@
 [Cache]: https://github.com/userfrosting/cache
 [cache-develop]: https://github.com/userfrosting/cache/tree/develop
 [cache-version]: https://img.shields.io/github/release/userfrosting/cache.svg
-[cache-master-build]: https://travis-ci.org/userfrosting/cache.svg?branch=master
+[cache-master-build]: https://github.com/userfrosting/cache/workflows/Build/badge.svg?branch=master
 [cache-master-codecov]: https://codecov.io/gh/userfrosting/cache/branch/master/graph/badge.svg
-[cache-develop-build]: https://travis-ci.org/userfrosting/cache.svg?branch=develop
+[cache-develop-build]: https://github.com/userfrosting/cache/workflows/Build/badge.svg?branch=develop
 [cache-develop-codecov]: https://codecov.io/gh/userfrosting/cache/branch/develop/graph/badge.svg
 [cache-releases]: https://github.com/userfrosting/cache/releases
-[cache-travis]: https://travis-ci.org/userfrosting/cache
+[cache-travis]: https://github.com/userfrosting/cache/actions?query=workflow%3ABuild
 [cache-codecov]: https://codecov.io/gh/userfrosting/cache
 [cache-style-master]: https://github.styleci.io/repos/82357058/shield?branch=master&style=flat
 [cache-style-develop]: https://github.styleci.io/repos/82357058/shield?branch=develop&style=flat

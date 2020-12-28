@@ -26,7 +26,7 @@ class TaggableFileDriverTest extends TestCase
     public $file;
     public $path;
 
-    public function setup()
+    public function setup(): void
     {
         $this->file = new Filesystem();
         $this->path = './tests/cache';
@@ -157,7 +157,7 @@ class TaggableFileDriverTest extends TestCase
         $this->assertEquals('boofar', $mock->itemKey('test'));
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         Mockery::close();
     }
