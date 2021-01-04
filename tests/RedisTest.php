@@ -8,9 +8,10 @@
  * @license   https://github.com/userfrosting/cache/blob/master/LICENSE.md (MIT License)
  */
 
-namespace UserFrosting\Cache;
+namespace UserFrosting\Cache\Tests;
 
 use PHPUnit\Framework\TestCase;
+use UserFrosting\Cache\RedisStore;
 
 /**
  * @requires extension redis

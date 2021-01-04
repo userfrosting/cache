@@ -8,7 +8,7 @@
  * @license   https://github.com/userfrosting/cache/blob/master/LICENSE.md (MIT License)
  */
 
-namespace UserFrosting\Cache;
+namespace UserFrosting\Cache\Tests;
 
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
