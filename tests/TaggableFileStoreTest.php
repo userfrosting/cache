@@ -10,10 +10,10 @@
 
 namespace UserFrosting\Cache\Tests;
 
-use PHPUnit\Framework\TestCase;
 use UserFrosting\Cache\TaggableFileStore;
+use UserFrosting\Cache\Tests\StoreTestCase;
 
-class TaggableFileStoreTest extends TestCase
+class TaggableFileStoreTest extends StoreTestCase
 {
     public $storage;
 
@@ -22,14 +22,20 @@ class TaggableFileStoreTest extends TestCase
         $this->storage = './tests/cache/TaggableFileStore';
     }
 
+    /** {@inheritdoc} */
+    protected function createStore()
+    {
+        // Create the $cache object
+        $cacheStore = new TaggableFileStore($this->storage);
+        return $cacheStore->instance();
+    }
+
     /**
      * Test file store.
      */
     public function testTaggableFileStore()
     {
-        // Create the $cache object
-        $cacheStore = new TaggableFileStore($this->storage);
-        $cache = $cacheStore->instance();
+        $cache = $this->createStore();
 
         // Store "foo" and try to read it
         $cache->forever('foo', 'bar');
@@ -38,9 +44,7 @@ class TaggableFileStoreTest extends TestCase
 
     public function TaggableFileStorePersistence()
     {
-        // Create the $cache object
-        $cacheStore = new TaggableFileStore($this->storage);
-        $cache = $cacheStore->instance();
+        $cache = $this->createStore();
 
         // Doesn't store anything, just tried to read the last one
         $this->assertEquals('bar', $cache->get('foo'));
@@ -48,9 +52,7 @@ class TaggableFileStoreTest extends TestCase
 
     public function testMultipleTaggableFileStore()
     {
-        // Create two $cache object
-        $cacheStore = new TaggableFileStore($this->storage);
-        $cache = $cacheStore->instance();
+        $cache = $this->createStore();
 
         // Store stuff in first
         $cache->tags('global')->forever('test', '1234');
@@ -72,9 +74,7 @@ class TaggableFileStoreTest extends TestCase
 
     public function testMultipleTaggableFileStoreWithTags()
     {
-        // Create two $cache object
-        $cacheStore = new TaggableFileStore($this->storage);
-        $cache = $cacheStore->instance();
+        $cache = $this->createStore();
 
         // Store stuff in first
         $cache->tags(['foo', 'red'])->forever('bar', 'red');
@@ -92,9 +92,7 @@ class TaggableFileStoreTest extends TestCase
 
     public function testTagsFlush()
     {
-        // Get store
-        $cacheStore = new TaggableFileStore($this->storage);
-        $cache = $cacheStore->instance();
+        $cache = $this->createStore();
 
         // Start by not using tags
         $cache->put('test', '123', 60);

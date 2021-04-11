@@ -10,22 +10,32 @@
 
 namespace UserFrosting\Cache\Tests;
 
-use PHPUnit\Framework\TestCase;
 use UserFrosting\Cache\MemcachedStore;
+use UserFrosting\Cache\Tests\StoreTestCase;
 
 /**
  * @requires extension Memcached
  */
-class MemcachedTest extends TestCase
+class MemcachedStoreTest extends StoreTestCase
 {
+    /** {@inheritdoc} */
+    protected function createStore()
+    {
+        // Create $cache with default config in CI, and tweaked in Lando
+        $config = [];
+        if (getenv('LANDO') === 'ON') {
+            $config['host'] = 'memcached-cache';
+        }
+        $cacheStore = new MemcachedStore($config);
+        return $cacheStore->instance();
+    }
+
     /**
      * Test memcached store.
      */
     public function testMemcachedStore()
     {
-        // Create the $cache object using the default memcache server config
-        $cacheStore = new MemcachedStore();
-        $cache = $cacheStore->instance();
+        $cache = $this->createStore();
 
         // Store "foo" and try to read it
         $cache->forever('foo', 'memcached bar');
@@ -34,9 +44,7 @@ class MemcachedTest extends TestCase
 
     public function testMemcachedStorePersistence()
     {
-        // Create the $cache object using the default memcache server config
-        $cacheStore = new MemcachedStore();
-        $cache = $cacheStore->instance();
+        $cache = $this->createStore();
 
         // Doesn't store anything, just tried to read the last one
         $this->assertEquals('memcached bar', $cache->get('foo'));
@@ -44,9 +52,7 @@ class MemcachedTest extends TestCase
 
     public function testMultipleMemcachedStore()
     {
-        // Create two $cache object
-        $cacheStore = new MemcachedStore();
-        $cache = $cacheStore->instance();
+        $cache = $this->createStore();
 
         // Store stuff in first
         $cache->tags('global')->forever('test', '1234');
@@ -68,9 +74,7 @@ class MemcachedTest extends TestCase
 
     public function testMultipleMemcachedStoreWithTags()
     {
-        // Create two $cache object
-        $cacheStore = new MemcachedStore();
-        $cache = $cacheStore->instance();
+        $cache = $this->createStore();
 
         // Store stuff in first
         $cache->tags(['foo', 'red'])->forever('bar', 'red');
@@ -88,9 +92,7 @@ class MemcachedTest extends TestCase
 
     public function testTagsFlush()
     {
-        // Get store
-        $cacheStore = new MemcachedStore();
-        $cache = $cacheStore->instance();
+        $cache = $this->createStore();
 
         // Start by not using tags
         $cache->put('test', '123', 60);

@@ -10,22 +10,32 @@
 
 namespace UserFrosting\Cache\Tests;
 
-use PHPUnit\Framework\TestCase;
 use UserFrosting\Cache\RedisStore;
+use UserFrosting\Cache\Tests\StoreTestCase;
 
 /**
  * @requires extension redis
  */
-class RedisTest extends TestCase
+class RedisStoreTest extends StoreTestCase
 {
+    /** {@inheritdoc} */
+    protected function createStore()
+    {
+        // Create $cache with default config in CI, and tweaked in Lando
+        $config = [];
+        if (getenv('LANDO') === 'ON') {
+            $config['host'] = 'redis-cache';
+        }
+        $cacheStore = new RedisStore($config);
+        return $cacheStore->instance();
+    }
+
     /**
      * Test redis store.
      */
     public function testRedisStore()
     {
-        // Create the $cache object using the default memcache server config
-        $cacheStore = new RedisStore();
-        $cache = $cacheStore->instance();
+        $cache = $this->createStore();
 
         // Store "foo" and try to read it
         $cache->forever('foo', 'Redis bar');
@@ -34,9 +44,7 @@ class RedisTest extends TestCase
 
     public function testRedisStorePersistence()
     {
-        // Create the $cache object using the default memcache server config
-        $cacheStore = new RedisStore();
-        $cache = $cacheStore->instance();
+        $cache = $this->createStore();
 
         // Doesn't store anything, just tried to read the last one
         $this->assertEquals('Redis bar', $cache->get('foo'));
@@ -44,9 +52,7 @@ class RedisTest extends TestCase
 
     public function testMultipleRedisStore()
     {
-        // Create two $cache object
-        $cacheStore = new RedisStore();
-        $cache = $cacheStore->instance();
+        $cache = $this->createStore();
 
         // Store stuff in first
         $cache->tags('global')->forever('test', '1234');
@@ -68,9 +74,7 @@ class RedisTest extends TestCase
 
     public function testTagsFlush()
     {
-        // Get store
-        $cacheStore = new RedisStore();
-        $cache = $cacheStore->instance();
+        $cache = $this->createStore();
 
         // Start by not using tags
         $cache->put('test', '123', 60);

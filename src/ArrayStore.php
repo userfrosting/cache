@@ -10,10 +10,10 @@
 
 namespace UserFrosting\Cache;
 
-use Illuminate\Cache\CacheManager;
 use Illuminate\Config\Repository;
 use Illuminate\Container\Container;
-use Illuminate\Contracts\Cache\Store;
+use Illuminate\Contracts\Cache\Repository as CacheRepositoryContract;
+use UserFrosting\Cache\Patch\Redis\CacheManager;
 
 /**
  * ArrayStore Class.
@@ -72,7 +72,7 @@ class ArrayStore
     /**
      * Return the store instance from the Laravel CacheManager.
      *
-     * @return Store Laravel Cache instance
+     * @return CacheRepositoryContract Laravel Cache instance
      */
     public function instance()
     {
