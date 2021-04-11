@@ -11,7 +11,6 @@
 namespace UserFrosting\Cache\Tests;
 
 use UserFrosting\Cache\MemcachedStore;
-use UserFrosting\Cache\Tests\StoreTestCase;
 
 /**
  * @requires extension Memcached
@@ -27,6 +26,7 @@ class MemcachedStoreTest extends StoreTestCase
             $config['host'] = 'memcached-cache';
         }
         $cacheStore = new MemcachedStore($config);
+
         return $cacheStore->instance();
     }
 

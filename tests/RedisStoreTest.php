@@ -11,7 +11,6 @@
 namespace UserFrosting\Cache\Tests;
 
 use UserFrosting\Cache\RedisStore;
-use UserFrosting\Cache\Tests\StoreTestCase;
 
 /**
  * @requires extension redis
@@ -27,6 +26,7 @@ class RedisStoreTest extends StoreTestCase
             $config['host'] = 'redis-cache';
         }
         $cacheStore = new RedisStore($config);
+
         return $cacheStore->instance();
     }
 

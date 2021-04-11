@@ -36,15 +36,15 @@ abstract class StoreTestCase extends TestCase
         $this->assertSame(999, $cache->get('string'));
 
         // array filled
-        $cache->put('array_filled', [ 'a', 'b', 'c', 1, 2, 3 ]);
+        $cache->put('array_filled', ['a', 'b', 'c', 1, 2, 3]);
         $this->assertSame(null, $cache->get('array'));
-        
+
         // array empty
         $cache->put('array_empty', []);
         $this->assertSame(null, $cache->get('array'));
-        
+
         // object
-        $cache->put('object', (object)[]);
+        $cache->put('object', (object) []);
         $this->assertSame(null, $cache->get('array'));
     }
 }

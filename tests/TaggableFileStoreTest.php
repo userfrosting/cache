@@ -11,7 +11,6 @@
 namespace UserFrosting\Cache\Tests;
 
 use UserFrosting\Cache\TaggableFileStore;
-use UserFrosting\Cache\Tests\StoreTestCase;
 
 class TaggableFileStoreTest extends StoreTestCase
 {
@@ -27,6 +26,7 @@ class TaggableFileStoreTest extends StoreTestCase
     {
         // Create the $cache object
         $cacheStore = new TaggableFileStore($this->storage);
+
         return $cacheStore->instance();
     }
 
