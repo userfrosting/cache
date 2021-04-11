@@ -4,7 +4,7 @@
  * UserFrosting Cache (http://www.userfrosting.com)
  *
  * @link      https://github.com/userfrosting/cache
- * @copyright Copyright (c) 2013-2019 Alexander Weissman
+ * @copyright Copyright (c) 2013-2021 Alexander Weissman
  * @license   https://github.com/userfrosting/cache/blob/master/LICENSE.md (MIT License)
  */
 
