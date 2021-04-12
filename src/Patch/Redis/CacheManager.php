@@ -11,11 +11,10 @@
 namespace UserFrosting\Cache\Patch\Redis;
 
 use Illuminate\Cache\CacheManager as UpstreamCacheManager;
-use UserFrosting\Cache\Patch\Redis\RedisStore;
 
 /**
  * Permits usage of patched `RedisStore`.
- * See https://github.com/userfrosting/cache/issues/8
+ * See https://github.com/userfrosting/cache/issues/8.
  */
 class CacheManager extends UpstreamCacheManager
 {

@@ -14,7 +14,7 @@ use Illuminate\Cache\RedisStore as UpstreamRedisStore;
 
 /**
  * A patched `RedisStore` which resolves value an integer serialization bug.
- * See https://github.com/userfrosting/cache/issues/8
+ * See https://github.com/userfrosting/cache/issues/8.
  */
 class RedisStore extends UpstreamRedisStore
 {
