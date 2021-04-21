@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+- Fix for integers being cast to strings with Redis store ([#8])
+
 ## [4.4.2]
 - Replaced Travis with GitHub Action for build
 - Upgrade deprecation in tests
@@ -46,3 +49,4 @@ Initial release
 [4.1.1]: https://github.com/userfrosting/cache/compare/4.1.0...4.1.1
 [#1]: https://github.com/userfrosting/cache/issues/1
 [#5]: https://github.com/userfrosting/cache/issues/5
+[#8]: https://github.com/userfrosting/cache/issues/8

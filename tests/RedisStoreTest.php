@@ -4,49 +4,55 @@
  * UserFrosting Cache (http://www.userfrosting.com)
  *
  * @link      https://github.com/userfrosting/cache
- * @copyright Copyright (c) 2013-2019 Alexander Weissman
+ * @copyright Copyright (c) 2013-2021 Alexander Weissman
  * @license   https://github.com/userfrosting/cache/blob/master/LICENSE.md (MIT License)
  */
 
 namespace UserFrosting\Cache\Tests;
 
-use PHPUnit\Framework\TestCase;
-use UserFrosting\Cache\MemcachedStore;
+use UserFrosting\Cache\RedisStore;
 
 /**
- * @requires extension Memcached
+ * @requires extension redis
  */
-class MemcachedTest extends TestCase
+class RedisStoreTest extends StoreTestCase
 {
-    /**
-     * Test memcached store.
-     */
-    public function testMemcachedStore()
+    /** {@inheritdoc} */
+    protected function createStore()
     {
-        // Create the $cache object using the default memcache server config
-        $cacheStore = new MemcachedStore();
-        $cache = $cacheStore->instance();
+        // Create $cache with default config in CI, and tweaked in Lando
+        $config = [];
+        if (getenv('LANDO') === 'ON') {
+            $config['host'] = 'redis-cache';
+        }
+        $cacheStore = new RedisStore($config);
+
+        return $cacheStore->instance();
+    }
+
+    /**
+     * Test redis store.
+     */
+    public function testRedisStore()
+    {
+        $cache = $this->createStore();
 
         // Store "foo" and try to read it
-        $cache->forever('foo', 'memcached bar');
-        $this->assertEquals('memcached bar', $cache->get('foo'));
+        $cache->forever('foo', 'Redis bar');
+        $this->assertEquals('Redis bar', $cache->get('foo'));
     }
 
-    public function testMemcachedStorePersistence()
+    public function testRedisStorePersistence()
     {
-        // Create the $cache object using the default memcache server config
-        $cacheStore = new MemcachedStore();
-        $cache = $cacheStore->instance();
+        $cache = $this->createStore();
 
         // Doesn't store anything, just tried to read the last one
-        $this->assertEquals('memcached bar', $cache->get('foo'));
+        $this->assertEquals('Redis bar', $cache->get('foo'));
     }
 
-    public function testMultipleMemcachedStore()
+    public function testMultipleRedisStore()
     {
-        // Create two $cache object
-        $cacheStore = new MemcachedStore();
-        $cache = $cacheStore->instance();
+        $cache = $this->createStore();
 
         // Store stuff in first
         $cache->tags('global')->forever('test', '1234');
@@ -66,31 +72,9 @@ class MemcachedTest extends TestCase
         $this->assertEquals('BARRRRRRRRE', $cache->tags('user')->get('foo'));
     }
 
-    public function testMultipleMemcachedStoreWithTags()
-    {
-        // Create two $cache object
-        $cacheStore = new MemcachedStore();
-        $cache = $cacheStore->instance();
-
-        // Store stuff in first
-        $cache->tags(['foo', 'red'])->forever('bar', 'red');
-
-        // Store stuff in second
-        $cache->tags(['foo', 'blue'])->forever('bar', 'blue');
-
-        // Flush first
-        $cache->tags('red')->flush();
-
-        // First show be empty, but not the second one
-        $this->assertEquals(null, $cache->tags(['foo', 'red'])->get('bar'));
-        $this->assertEquals('blue', $cache->tags(['foo', 'blue'])->get('bar'));
-    }
-
     public function testTagsFlush()
     {
-        // Get store
-        $cacheStore = new MemcachedStore();
-        $cache = $cacheStore->instance();
+        $cache = $this->createStore();
 
         // Start by not using tags
         $cache->put('test', '123', 60);
