@@ -1,0 +1,28 @@
+name: uf-cache
+
+services:
+  appserver:
+    type: php:7.4
+    via: cli
+    xdebug: "debug,develop,coverage"
+    composer_version: '2-latest'
+
+  # Redis cache
+  redis-cache:
+    type: redis:6
+
+  # Memcached cache
+  memcached-cache:
+    type: memcached:1
+
+tooling:
+  composer:
+    service: appserver
+    cmd: composer
+  phpunit:
+    service: appserver
+    description: "Run PHP Unit tests"
+    cmd: vendor/bin/phpunit
+  redis-cli:
+    service: redis-cache
+    description: "Redis cache CLI"

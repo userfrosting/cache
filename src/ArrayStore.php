@@ -4,16 +4,16 @@
  * UserFrosting Cache (http://www.userfrosting.com)
  *
  * @link      https://github.com/userfrosting/cache
- * @copyright Copyright (c) 2013-2019 Alexander Weissman
+ * @copyright Copyright (c) 2013-2021 Alexander Weissman
  * @license   https://github.com/userfrosting/cache/blob/master/LICENSE.md (MIT License)
  */
 
 namespace UserFrosting\Cache;
 
-use Illuminate\Cache\CacheManager;
 use Illuminate\Config\Repository;
 use Illuminate\Container\Container;
-use Illuminate\Contracts\Cache\Store;
+use Illuminate\Contracts\Cache\Repository as CacheRepositoryContract;
+use UserFrosting\Cache\Patch\Redis\CacheManager;
 
 /**
  * ArrayStore Class.
@@ -72,7 +72,7 @@ class ArrayStore
     /**
      * Return the store instance from the Laravel CacheManager.
      *
-     * @return Store Laravel Cache instance
+     * @return CacheRepositoryContract Laravel Cache instance
      */
     public function instance()
     {
